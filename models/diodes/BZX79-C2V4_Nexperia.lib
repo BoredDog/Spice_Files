@@ -1,0 +1,84 @@
+* ==========================================================================
+* @part: BZX79-C2V4
+* @family: diodes
+* @source: Nexperia
+* @url: https://assets.nexperia.com/documents/spice-model/BZX79-C2V4.txt
+* @origin-file: manual/nexperia/BZX79-C2V4.txt
+* @retrieved: 2026-09-24
+* @licence: no licence or copyright text in the vendor file (terms unknown)
+* @added-by: garv.singh
+* @pins: BZX79-C2V4: 1 2
+* The complete origin file follows, unchanged.
+* ==========================================================================
+
+*
+******************************************
+*
+*BZX79-C2V4
+*
+*NXP Semiconductors
+*
+*Voltage regulator diode
+*
+*
+*
+*
+* 
+*VFmax = 0,9V @ IF = 10mA
+*IRmax = 50µA @ VR = 1V
+*
+*VZmax = 2,6V @ IZ = 5mA
+*
+*
+*
+*
+* 
+*
+*
+*Package pinning does not match Spice model pinning.
+*Package: SOD27 (DO35)
+*
+*Package Pin 1: Anode
+*Package Pin 2: Cathode
+*
+*
+*
+*Extraction date (week/year): 51/2015
+*Simulator: SPICE2
+*
+******************************************
+*#
+.SUBCKT BZX79-C2V4 1 2 
+*
+R1 1 2 1E+010   
+ D1 1 2  
+ + DIODE1
+ D2 3 1  
+ + DIODE2
+ VZ 2 3 0.01  
+*
+*The resistor R1, the diode D2 and VZ do not 
+*reflect physical devices. 
+*Instead they improve modeling
+*in the reverse mode of 
+*operation.
+*
+ .MODEL DIODE1 D 
+ + IS = 2E-011   
+ + N = 1.53      
+ + BV = 2.7      
+ + IBV = 1E-009  
+ + RS = 0.16     
+ + CJO = 1.902E-010      
+ + VJ = 0.63     
+ + M = 0.29      
+ + FC = 0.5      
+ + TT = 0
+ + EG = 1.1      
+ + XTI = 3       
+ .MODEL DIODE2 D 
+ + IS = 1E-009   
+ + N = 5.1       
+ + RS = 66       
+ .ENDS   
+*

@@ -1,0 +1,105 @@
+* ==========================================================================
+* @part: P6KE6V8A TVS
+* @family: diodes
+* @source: ST
+* @url: https://github.com/kicad-spice-library/KiCad-Spice-Library (Bordodynov LTspice library) (transil_ST.lib)
+* @origin-file: KiCad-Spice-Library/Models/uncategorized/Bordodynovs Electronics Lib/sub/transil_ST.lib
+* @retrieved: 2026-09-24
+* @licence: notice: "(c) 1997 ST Microelectronics. All rights reserved."
+* @added-by: garv.singh
+* @pins: P6KE6V8A: Anode Cathode
+* @patched: 1 helper subckt/model name(s) suffixed with '__P6KE6V8A' so this file can be included together with other files
+* Definitions below are copied verbatim from the origin file.
+* ==========================================================================
+
+* ---- original file header ----
+* File     : TRANSIL_ST.LIB
+* Revision : 1.0
+* Date     : 8/29/97
+*
+***************************************************************************************
+* Information included is believed to be accurate and reliable. However, *
+* ST Microelectronics assumes no responsibility for the consequences of  *
+* use of such information nor for any infringement of patents or other   *
+* rights of third parties which may result from its use. No license is   *
+* granted by implication or otherwise under any patent patent rights of  *
+* ST Microelectronics. Specification mentionned in this publication are  *
+* subject to change without notice. This publication superseedes and 	 *
+* replaces all information previously supplied. ST Microelectronics      *
+* products are not authorized for use as critical components in life     *
+* support or systems without express written approval of ST              *
+* Microelectronics.                          	                         *
+*                                                                    	 *			*
+*    (c) 1997 ST Microelectronics. All rights reserved.     	         *
+*                                                                    	 *			*
+*           ST Microelectronics GROUP OF COMPANIES                       *
+* Australia - Brazil - France - Germany - Hong Kong - Italy - Japan  	 *
+* Korea - Malaysia - Malta - Morocco - The Netherlands - Singapore   	 *
+* Spain - Sweden - Switzerland - Taiwan - United Kingdom - U.S.A.    	 *
+*									 *
+***************************************************************************************
+*
+
+*$
+* UNIDIRECTIONAL TRANSIL
+
+*$
+* ---- end of original file header ----
+
+.SUBCKT TRANSIL__P6KE6V8A  Anode  Cathode  PARAMS:
++ IRM=1u VBRnom=12  VBRmax=13  IR=1m 
++ VCLmax=20  Ipp=100  Cjof=1n
++ ISF=1f  NF=1  RSF=1m  IKFF=1000
+
+
+
+* IRM		Stand-off current at VRM
+* VBR		Breakdown voltage
+* IR		Reverse current at VBR
+* VCL		Clamping voltage
+* Ipp		Surge current
+* Cjo		junction capacitance at 0V
+* IS		Saturation current
+* N		Emission coefficient
+* RS		Serie résistance
+* IKF		High injection knee current
+
+ 
+Drev    A_int    Cathode    TRANSR
+Dfwd   Anode   Cathode    TRANSF
+Dr       A_int    Anode       DTRANS
+
+
+
+***** REVERSE BEHAVIOUR *****
+
+.MODEL  TRANSR  D(
++ IS={IRM/2}   RS={(VCLmax-VBRmax)/Ipp}
++ BV={VBRnom}  IBV={IR}
++ IKF=1000  Cjo=1p  M=.3333  VJ=.6
++ ISR=1n  TT=1u )
+
+
+****************** FORWARD BEHAVIOUR ******************
+***** JUNCTION CAPACITANCE BEHAVIOUR Cj(VR) *****
+
+.MODEL   TRANSF  D(
++ IS={ISF}  N={NF}  RS={RSF}  IKF={IKFF}
++ Cjo={Cjof}  M=.3333  VJ=0.6  ISR=1.000E-21
++ BV=1000  IBV=1n  TT=1u )
+
+
+.MODEL   DTRANS  D(
++ IS=1n  N=.01  RS=1u  IKF=1000  Cjo=1p
++ M=.3333  VJ=.6  ISR=1n  BV=1000  IBV=1u
++ TT=1u )
+
+.ENDS
+
+*$
+.SUBCKT  P6KE6V8A  Anode  Cathode
+X1  Anode  Cathode  TRANSIL__P6KE6V8A  PARAMS:
++ IRM=1m  VBRnom=6.8  VBRmax=7.14
++ IR=10m  VCLmax=13.4  Ipp=298  Cjof=4000p
++ ISF=27.04f   NF=1.016  RSF=13.69m   IKFF=41.7
+.ENDS

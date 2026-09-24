@@ -1,0 +1,27 @@
+* ==========================================================================
+* @part: 4N25
+* @family: optocouplers
+* @source: LTspice
+* @url: LTspice lib/sub (local LTspice install, copied by scripts/fetch_vendor.sh)
+* @origin-file: ltspice-lib/sub/4N25.sub
+* @retrieved: 2026-09-24
+* @licence: notice: "Copyright © Linear Technology Corp. 1998, 1999, 2000. All rights reserved."
+* @added-by: nav
+* @pins: 4N25: 1 2 3 4 5
+* Definitions below are copied verbatim from the origin file.
+* ==========================================================================
+
+* ---- original file header ----
+* Copyright © Linear Technology Corp. 1998, 1999, 2000.  All rights reserved.
+*
+* ---- end of original file header ----
+
+.subckt 4N25 1 2 3 4 5
+R1 N003 2 2
+D1 1 N003 LD
+G1 3 5 N003 2 .876m
+C1 1 2 18p
+Q1 3 5 4 [4] NP
+.model LD D(Is=1e-20 Cjo=18p)
+.model NP NPN(Bf=610 Vaf=140 Ikf=15m Rc=1 Cjc=19p Cje=7p Cjs=7p C2=1e-15)
+.ends 4N25

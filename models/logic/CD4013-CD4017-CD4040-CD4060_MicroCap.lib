@@ -1,0 +1,539 @@
+* ==========================================================================
+* @part: CD4017B CD4060B CD4013B CD4040B
+* @family: logic
+* @source: MicroCap
+* @url: https://ngspice.sourceforge.io/model-parameters/MicroCap-LIBRARY.7z (Micro-Cap 12 library)
+* @origin-file: ngspice/MicroCap-LIBRARY/MicroCap-LIBRARY-for-ngspice/cmos.lib
+* @retrieved: 2026-09-24
+* @licence: no licence or copyright text in the vendor file (terms unknown)
+* @added-by: garv.singh
+* @pins: CD4017B: CLK CLKENBAR RESET COUT Q0 Q1 Q2 Q3 Q4 Q5 Q6 Q7 Q8 Q9
+* @pins: CD4060B: OUT1 OUT2 RESET CLOCK Q4 Q5 Q6 Q7 Q8 Q9 Q10 Q12 Q13 Q14
+* @pins: CD4013B: SA RA CA DA QA QABAR
+* @pins: CD4040B: CLK RESET Q1 Q2 Q3 Q4 Q5 Q6 Q7 Q8 Q9 Q10 Q11 Q12
+* @notes: PSpice digital (U-devices): ngspice only
+* Definitions below are copied verbatim from the origin file.
+* ==========================================================================
+
+* ---- original file header ----
+* -------------------------------------------------------------------------
+*    Spectrum Software, all rights reserved, copywrite 1994,
+*    Micro-Cap V Digital Library
+*
+*    Parts in this library are modeled at ambient room temperature (TA=25øC)
+*    unless otherwise noted. Delays were taken from tables specifying a load
+*    capacitance of 50pF.  (CL = 50pF unless otherwise stated.)
+*
+*    The CMOS Logic library contains parts found in the National CMOS
+*    Logic Databook, 1988, and Motorola CMOS Logic Data book, 1991, DL131.
+*
+*    Note that the constraint data from the Motorola book listed above had
+*    the min and max values reversed.  In this library, they are transposed
+*    so that min constraint times represent best case scenarios (as in 
+*    min delay times), and max constraint times represent worst case
+*    scenarios.  This is then consistent with the National data book.
+
+* ----------------------------------------------------------- CD4000----
+*
+*  Dual 3-Input NOR Gate plus Inverter
+*
+*  The CMOS Logic Data Book, 1988, National Pages 5-3 to 5-5
+*  bss    2/14/95
+*
+* ---- end of original file header ----
+
+*
+*
+* ----------------------------------------------------------- CD4013B----
+*
+*  Dual Type D Flip-Flop
+*
+*  The CMOS Logic Data Book, 1991, Motorola Pages 6-33 to 6-36
+*  jds    6/6/94
+*  This part is shown in the data book as MC14013B
+*
+.SUBCKT CD4013B SA RA CA DA QA QABAR
++  optional: VDD=$G_CD4000_VDD VSS=$G_CD4000_VSS
++  params: MNTYMXDLY=0 IO_LEVEL=0
+*
+Uf0 inva(2) VDD VSS
++   SA RA prebar clrbar
++   D0_GATE IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+Uf1 dff(1) VDD VSS
++   prebar clrbar CA DA Q_A Q_ABAR
++   DFF4013B IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+.MODEL DFF4013B UEFF(TWPCLMN=250NS TWPCLTY=125NS TWPCLMX=-1
++                    TWCLKLMN=250NS TWCLKLTY=125NS TWCLKLMX=-1
++                    TWCLKHMN=250NS TWCLKHTY=125NS TWCLKHMX=-1
++                    TSUDCLKMN=-1NS TSUDCLKTY=250NS TSUDCLKMX=-1
++                    THDCLKMN=40NS THDCLKTY=20NS THDCLKMX=-1)
+
+U3 PINDLY(2,0,3) VDD VSS
++ Q_A Q_ABAR
++ CA SA RA
++ QA QABAR
++ IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
++ BOOLEAN:
++          EDGE = {CHANGED_LH(CA,0)}
++          SET = {CHANGED_LH(SA,0)}
++          CLEAR = {CHANGED_LH(RA,0)}
++ PINDLY:
++          QA QABAR = {
++            CASE(
++               SET, DELAY(-1,175NS,350NS),
++               CLEAR, DELAY(-1,225NS,450NS),
++               EDGE & (TRN_LH | TRN_HL), DELAY(-1,175NS,350NS),
++               DELAY(-1,226NS,451NS))}
+  
+U4 CONSTRAINT(3) VDD VSS
++ CA SA RA
++ IO_4000B IO_LEVEL={IO_LEVEL}
++ FREQ:
++        NODE = CA
++        MAXFREQ = 2MEG
++ SETUP_HOLD:
++             CLOCK LH = CA
++             DATA(2) = SA RA
++             SETUPTIME_LO = 80NS
++             HOLDTIME_LO = 50NS
+
+.ENDS CD4013B
+
+* ----------------------------------------------------------- CD4017B----
+*
+*  Decade Counter
+*
+*  The CMOS Logic Data Book, 1991, Motorola Pages 6-54 to 6-58
+*  jds    6/6/94
+*  This part is shown in the data book as MC14017B
+*  Note that the NAND gate feeding into the 3rd flip-flops D input should
+*  be an AND gate for the circuit to operate as in the timing diagram.
+*
+.SUBCKT CD4017B CLK CLKENBAR RESET COUT Q0 Q1 Q2 Q3 Q4 Q5 Q6 Q7 Q8 Q9
++  optional: VDD=$G_CD4000_VDD VSS=$G_CD4000_VSS
++  params: MNTYMXDLY=0 IO_LEVEL=0
+
+U14017B LOGICEXP(13,14) VDD VSS
++      CLK CLKENBAR RESET q1ff q2ff q3ff q4ff q5ff
++      q1ffbar q2ffbar q3ffbar q4ffbar q5ffbar
++      clock clear i1
++      COUT_O Q0_O Q1_O Q2_O Q3_O Q4_O Q5_O Q6_O Q7_O Q8_O Q9_O
++      D0_GATE IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
++
++    LOGIC:
++      clock = {( CLK & ~CLKENBAR )}
++      clear = { (~RESET) }
++      i1 = { (q2ff & (q1ff | q3ff)) }
++      Q0_O = { (q1ffbar & q5ffbar) }
++      Q1_O = { (q1ff & q2ffbar) }
++      Q2_O = { (q2ff & q3ffbar) }
++      Q3_O = { (q3ff & q4ffbar) }
++      Q4_O = { (q4ff & q5ffbar) }
++      Q5_O = { (q1ff & q5ff) }
++      Q6_O = { (q1ffbar & q2ff) }
++      Q7_O = { (q2ffbar & q3ff) }
++      Q8_O = { (q3ffbar & q4ff) }
++      Q9_O = { (q5ff & q4ffbar) }
++      COUT_O = { q5ffbar }
+
+Uf0 dff(5) VDD VSS
++   $D_HI clear clock q5ffbar q1ff i1 q3ff q4ff
++   q1ff q2ff q3ff q4ff q5ff q1ffbar q2ffbar q3ffbar q4ffbar q5ffbar
++   DLY_DFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+.MODEL DLY_DFF UEFF(TWCLKLMN=-1 TWCLKLTY=125NS TWCLKLMX=250NS
++                   TWCLKHMN=-1 TWCLKHTY=125NS TWCLKHMX=250NS)
+
+Udly PINDLY (11,0,2) VDD VSS
++    COUT_O Q0_O Q1_O Q2_O Q3_O Q4_O Q5_O Q6_O Q7_O Q8_O Q9_O
++    CLK RESET
++    COUT Q0 Q1 Q2 Q3 Q4 Q5 Q6 Q7 Q8 Q9
++    IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
++
++    BOOLEAN:
++     CP = {CHANGED_LH(CLK,0)}
++     CLR = { CHANGED_LH(RESET,0) }
++
++    PINDLY:
++       Q0 Q1 Q2 Q3 Q4 Q5 Q6 Q7 Q8 Q9 = {
++            CASE(
++                 CLR, DELAY(-1,500ns,1us),
++                 CP, DELAY(-1,500ns,1us),
++                 DELAY(-1,501ns,1.001us)
++                )
++            }
++       COUT = {
++            CASE(
++                 CLR, DELAY(-1,400ns,800ns),
++                 CP, DELAY(-1,400ns,800ns),
++                 DELAY(-1,401ns,801ns)
++                )
++            }
+
+Ucnstr CONSTRAINT(3) VDD VSS
++          CLKENBAR CLK RESET
++          IO_4000B
++
++      FREQ:
++         NODE = CLK
++         MAXFREQ = 5MEG
++      WIDTH:
++         NODE = RESET
++         MIN_HI = 250ns
++      SETUP_HOLD:
++        CLOCK LH = CLK
++        DATA(1) = CLKENBAR
++        SETUPTIME_HI = 175ns
++        SETUPTIME_LO = 260ns
++        WHEN = { RESET != '1 }
++      SETUP_HOLD:
++        CLOCK LH = CLK
++        DATA(1) = RESET
++        SETUPTIME_LO = 375ns
+
+.ENDS CD4017B
+
+* ----------------------------------------------------------- CD4040B ----
+*
+*  12-Stage Binary Counter
+*
+*  The CMOS Logic Data Book, 1991, Motorola Pages 6-108 to 6-111
+*  jds    6/8/94
+*  This part is shown in the data book as MC14040B
+*
+.SUBCKT CD4040B CLK RESET Q1 Q2 Q3 Q4 Q5 Q6 Q7 Q8 Q9 Q10 Q11 Q12
++  optional: VDD=$G_CD4000_VDD VSS=$G_CD4000_VSS
++  params: MNTYMXDLY=0 IO_LEVEL=0
+
+USTBUF BUF VDD VSS
++ CLK CLKST
++ D0_GATE IO_4000B_ST MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+uf0 inv VDD VSS
++   RESET clr
++   D0_GATE IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+Uf1 jkff(1) VDD VSS
++   $D_HI clr CLKST $D_HI $D_HI Q1_O Q1BAR_O
++   D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+Uf2 jkff(1) VDD VSS
++   $D_HI clr Q1_O $D_HI $D_HI Q2_O Q2BAR_O
++   D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+Uf3 jkff(1) VDD VSS
++   $D_HI clr Q2_O $D_HI $D_HI Q3_O Q3BAR_O
++   D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+Uf4 jkff(1) VDD VSS
++   $D_HI clr Q3_O $D_HI $D_HI Q4_O Q4BAR_O
++   D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+Uf5 jkff(1) VDD VSS
++   $D_HI clr Q4_O $D_HI $D_HI Q5_O Q5BAR_O
++   D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+Uf6 jkff(1) VDD VSS
++   $D_HI clr Q5_O $D_HI $D_HI Q6_O Q6BAR_O
++   D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+Uf7 jkff(1) VDD VSS
++   $D_HI clr Q6_O $D_HI $D_HI Q7_O Q7BAR_O
++   D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+Uf8 jkff(1) VDD VSS
++   $D_HI clr Q7_O $D_HI $D_HI Q8_O Q8BAR_O
++   D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+Uf9 jkff(1) VDD VSS
++   $D_HI clr Q8_O $D_HI $D_HI Q9_O Q9BAR_O
++   D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+Uf10 jkff(1) VDD VSS
++   $D_HI clr Q9_O $D_HI $D_HI Q10_O Q10BAR_O
++   D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+Uf11 jkff(1) VDD VSS
++   $D_HI clr Q10_O $D_HI $D_HI Q11_O Q11BAR_O
++   D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+Uf12 jkff(1) VDD VSS
++   $D_HI clr Q11_O $D_HI $D_HI Q12_O Q12BAR_O
++   D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+Udly PINDLY (12,0,13) VDD VSS
++    Q1_O Q2_O Q3_O Q4_O Q5_O Q6_O Q7_O Q8_O Q9_O Q10_O Q11_O Q12_O
++    CLK RESET Q1BAR Q2BAR Q3BAR Q4BAR Q5BAR Q6BAR Q7BAR
++    Q8BAR Q9BAR Q10BAR Q11BAR
++    Q1 Q2 Q3 Q4 Q5 Q6 Q7 Q8 Q9 Q10 Q11 Q12
++    IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
++
++    PINDLY:
++       Q1  = {
++            CASE(
++                 CHANGED(RESET,0) & TRN_HL, DELAY(-1,370ns,740ns),
++                 CHANGED_HL(CLK,0), DELAY(-1,260ns,520ns),
++                 DELAY(-1,261ns,521ns)
++                )
++            }
++       Q2  = {
++            CASE(
++                 CHANGED(RESET,0) & TRN_HL, DELAY(-1,370ns,740ns),
++                 CHANGED_HL(Q1_O,0), DELAY(-1,384.1ns,768.2ns),
++                 DELAY(-1,385.1ns,769.2ns)
++                )
++            }
++       Q3  = {
++            CASE(
++                 CHANGED(RESET,0) & TRN_HL, DELAY(-1,370ns,740ns),
++                 CHANGED_HL(Q2_O,0), DELAY(-1,508.2ns,1016.4ns),
++                 DELAY(-1,509.2ns,1017.4ns)
++                )
++            }
++       Q4  = {
++            CASE(
++                 CHANGED(RESET,0) & TRN_HL, DELAY(-1,370ns,740ns),
++                 CHANGED_HL(Q3_O,0), DELAY(-1,632.3ns,1264.6ns),
++                 DELAY(-1,633.3ns,1265.6ns)
++                )
++            }
++       Q5  = {
++            CASE(
++                 CHANGED(RESET,0) & TRN_HL, DELAY(-1,370ns,740ns),
++                 CHANGED_HL(Q4_O,0), DELAY(-1,756.4ns,1512.8ns),
++                 DELAY(-1,757.4ns,1513.8ns)
++                )
++            }
++       Q6  = {
++            CASE(
++                 CHANGED(RESET,0) & TRN_HL, DELAY(-1,370ns,740ns),
++                 CHANGED_HL(Q5_O,0), DELAY(-1,880.5ns,1761ns),
++                 DELAY(-1,881.5ns,1762ns)
++                )
++            }
++       Q7  = {
++            CASE(
++                 CHANGED(RESET,0) & TRN_HL, DELAY(-1,370ns,740ns),
++                 CHANGED_HL(Q6_O,0), DELAY(-1,1004.6ns,2009.2ns),
++                 DELAY(-1,1005.6ns,2010.2ns)
++                )
++            }
++       Q8  = {
++            CASE(
++                 CHANGED(RESET,0) & TRN_HL, DELAY(-1,370ns,740ns),
++                 CHANGED_HL(Q7_O,0), DELAY(-1,1128.7ns,2257.4ns),
++                 DELAY(-1,1129.7ns,2258.4ns)
++                )
++            }
++       Q9  = {
++            CASE(
++                 CHANGED(RESET,0) & TRN_HL, DELAY(-1,370ns,740ns),
++                 CHANGED_HL(Q8_O,0), DELAY(-1,1252.8ns,2505.6ns),
++                 DELAY(-1,1253.8ns,2506.6ns)
++                )
++            }
++       Q10  = {
++            CASE(
++                 CHANGED(RESET,0) & TRN_HL, DELAY(-1,370ns,740ns),
++                 CHANGED_HL(Q9_O,0), DELAY(-1,1376.9ns,2753.8ns),
++                 DELAY(-1,1377.9ns,2754.8ns)
++                )
++            }
++       Q11  = {
++            CASE(
++                 CHANGED(RESET,0) & TRN_HL, DELAY(-1,370ns,740ns),
++                 CHANGED_HL(Q10_O,0), DELAY(-1,1501ns,3002ns),
++                 DELAY(-1,1502ns,3003ns)
++                )
++            }
++       Q12  = {
++            CASE(
++                 CHANGED(RESET,0) & TRN_HL, DELAY(-1,370ns,740ns),
++                 CHANGED_HL(Q11_O,0), DELAY(-1,1625ns,3250ns),
++                 DELAY(-1,1626ns,3251ns)
++                )
++            }
+
+Ucnstr CONSTRAINT(2) VDD VSS
++          CLK RESET
++          IO_4000B
++
++      FREQ:
++         NODE = CLK
++         MAXFREQ = 2.1MEG
++      WIDTH:
++         NODE = CLK
++         MIN_HI = 140ns
++      WIDTH:
++         NODE = RESET
++         MIN_HI = 320ns
++      SETUP_HOLD:
++        CLOCK HL = CLK
++        DATA(1) = RESET
++        SETUPTIME_LO = 65ns
+
+.ENDS CD4040B
+
+.SUBCKT CD4060B
++ OUT1 OUT2 RESET CLOCK Q4 Q5 Q6 Q7 Q8 Q9 Q10 Q12 Q13 Q14
++ OPTIONAL:  VDD=$G_CD4000_VDD VSS=$G_CD4000_VSS
++ PARAMS:  MNTYMXDLY=0 IO_LEVEL=0
+
+U1 LOGICEXP(2,4) VDD VSS
++ RESET CLOCK
++ RESETBAR CLOCKBAR OUT1 OUT2
++ D0_GATE IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
++ LOGIC:
++   RESETBAR = {~RESET}
++   CLOCKBAR = {~CLOCK}
++   OUT1 = {CLOCKBAR}
++   OUT2 = {CLOCK}
+
+U2 BUF VDD VSS
++ CLOCKBAR CLOCKBARST
++ D0_GATE IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+U3 JKFF(1) VDD VSS
++ $D_HI RESETBAR CLOCKBARST
++ $D_HI $D_HI Q_1 Q_1BAR
++ D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+U4 JKFF(1) VDD VSS
++ $D_HI RESETBAR Q_1
++ $D_HI $D_HI Q_2 Q_2BAR
++ D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+U5 JKFF(1) VDD VSS
++ $D_HI RESETBAR Q_2
++ $D_HI $D_HI Q_3 Q_3BAR
++ D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+U6 JKFF(1) VDD VSS
++ $D_HI RESETBAR Q_3
++ $D_HI $D_HI Q_4 Q_4BAR
++ D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+U7 JKFF(1) VDD VSS
++ $D_HI RESETBAR Q_4
++ $D_HI $D_HI Q_5 Q_5BAR
++ D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+U8 JKFF(1) VDD VSS
++ $D_HI RESETBAR Q_5
++ $D_HI $D_HI Q_6 Q_6BAR
++ D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+U9 JKFF(1) VDD VSS
++ $D_HI RESETBAR Q_6
++ $D_HI $D_HI Q_7 Q_7BAR
++ D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+U10 JKFF(1) VDD VSS
++ $D_HI RESETBAR Q_7
++ $D_HI $D_HI Q_8 Q_8BAR
++ D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+U11 JKFF(1) VDD VSS
++ $D_HI RESETBAR Q_8
++ $D_HI $D_HI Q_9 Q_9BAR
++ D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+U12 JKFF(1) VDD VSS
++ $D_HI RESETBAR Q_9
++ $D_HI $D_HI Q_10 Q_10BAR
++ D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+U13 JKFF(1) VDD VSS
++ $D_HI RESETBAR Q_10
++ $D_HI $D_HI Q_11 Q_11BAR
++ D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+U14 JKFF(1) VDD VSS
++ $D_HI RESETBAR Q_11
++ $D_HI $D_HI Q_12 Q_12BAR
++ D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+U15 JKFF(1) VDD VSS
++ $D_HI RESETBAR Q_12
++ $D_HI $D_HI Q_13 Q_13BAR
++ D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+U16 JKFF(1) VDD VSS
++ $D_HI RESETBAR Q_13
++ $D_HI $D_HI Q_14 Q_14BAR
++ D0_EFF IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
+
+U17 PINDLY(10,0,11) VDD VSS
++ Q_4 Q_5 Q_6 Q_7 Q_8 Q_9 Q_10 Q_12 Q_13 Q_14
++ RESET Q_3 Q_4 Q_5 Q_6 Q_7 Q_8 Q_9 Q_11 Q_12 Q_13
++ Q4 Q5 Q6 Q7 Q8 Q9 Q10 Q12 Q13 Q14
++ IO_4000B MNTYMXDLY={MNTYMXDLY} IO_LEVEL={IO_LEVEL}
++ PINDLY:
++         Q4 = {
++           CASE(
++             CHANGED(RESET,0) & TRN_HL, DELAY(-1,170NS,360NS),
++             CHANGED_HL(Q_3,0) & (TRN_LH | TRN_HL), DELAY(-1,415NS,740NS),
++             DELAY(-1,416NS,741NS))}
++         Q5 = {
++           CASE(
++             CHANGED(RESET,0) & TRN_HL, DELAY(-1,170NS,360NS),
++             CHANGED_HL(Q_4,0) & (TRN_LH | TRN_HL), DELAY(-1,523.5NS,936NS),
++             DELAY(-1,524.5NS,937NS))}
++         Q6 = {
++           CASE(
++             CHANGED(RESET,0) & TRN_HL, DELAY(-1,170NS,360NS),
++             CHANGED_HL(Q_5,0) & (TRN_LH | TRN_HL), DELAY(-1,632NS,1132NS),
++             DELAY(-1,633NS,1133NS))}
++         Q7 = {
++           CASE(
++             CHANGED(RESET,0) & TRN_HL, DELAY(-1,170NS,360NS),
++             CHANGED_HL(Q_6,0) & (TRN_LH | TRN_HL), DELAY(-1,740.5NS,1328NS),
++             DELAY(-1,741.5NS,1329NS))}
++         Q8 = {
++           CASE(
++             CHANGED(RESET,0) & TRN_HL, DELAY(-1,170NS,360NS),
++             CHANGED_HL(Q_7,0) & (TRN_LH | TRN_HL), DELAY(-1,849NS,1524NS),
++             DELAY(-1,850NS,1525NS))}
++         Q9 = {
++           CASE(
++             CHANGED(RESET,0) & TRN_HL, DELAY(-1,170NS,360NS),
++             CHANGED_HL(Q_8,0) & (TRN_LH | TRN_HL), DELAY(-1,957.5NS,1720NS),
++             DELAY(-1,958.5NS,1721NS))}
++         Q10 = {
++           CASE(
++             CHANGED(RESET,0) & TRN_HL, DELAY(-1,170NS,360NS),
++             CHANGED_HL(Q_9,0) & (TRN_LH | TRN_HL), DELAY(-1,1066NS,1916NS),
++             DELAY(-1,1067NS,1917NS))}
++         Q12 = {
++           CASE(
++             CHANGED(RESET,0) & TRN_HL, DELAY(-1,170NS,360NS),
++             CHANGED_HL(Q_11,0) & (TRN_LH | TRN_HL), DELAY(-1,1283NS,2308NS),
++             DELAY(-1,1284NS,2309NS))}
++         Q13 = {
++           CASE(
++             CHANGED(RESET,0) & TRN_HL, DELAY(-1,170NS,360NS),
++             CHANGED_HL(Q_12,0) & (TRN_LH | TRN_HL), DELAY(-1,1391.5NS,2504NS),
++             DELAY(-1,1392.5NS,2505NS))}
++         Q14 = {
++           CASE(
++             CHANGED(RESET,0) & TRN_HL, DELAY(-1,170NS,360NS),
++             CHANGED_HL(Q_13,0) & (TRN_LH | TRN_HL), DELAY(-1,1500NS,2700NS),
++             DELAY(-1,1501NS,2701NS))}
+
+U18 CONSTRAINT(2) VDD VSS
++ CLOCK RESET
++ IO_4000B IO_LEVEL={IO_LEVEL}
++ WIDTH:
++        NODE = CLOCK
++        MIN_HI = 65NS
++        MIN_LO =  65NS
++ FREQ:
++        NODE = CLOCK
++        MAXFREQ = 5MEG
++ WIDTH:
++        NODE = RESET
++        MIN_HI = 40NS
+
+.ENDS CD4060B

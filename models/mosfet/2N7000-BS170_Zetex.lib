@@ -1,0 +1,182 @@
+* ==========================================================================
+* @part: 2N7000 BS170
+* @family: mosfet
+* @source: Zetex
+* @url: https://ngspice.sourceforge.io/model-parameters/MicroCap-LIBRARY.7z (Micro-Cap 12 library, Spectrum Software)
+* @origin-file: ngspice/MicroCap-LIBRARY/MicroCap-LIBRARY-for-ngspice/zetex.lib
+* @retrieved: 2026-09-24
+* @licence: grant: "It is supplied free of charge by Zetex for the purpose of research and design and may be used or copied intact (including this notice) for that purpose only."; notice: "(C) 1996 ZETEX PLC The copyright in this model and the design embodied belong to"
+* @added-by: nav
+* @pins: 2N7000_ZX: 3 4 5
+* @pins: BS170_ZX: 3 4 5
+* Definitions below are copied verbatim from the origin file.
+* ==========================================================================
+
+* ---- original file header ----
+*ZETEX  BC80716 Spice model    Last revision  27/2/03
+*
+* ---- end of original file header ----
+
+* ---- vendor notice (copied intact) ----
+*
+* For later versions of Spice use the following parameter to obtain
+* better zener voltage variation over temperature.
+* TBV1=.38E-3
+*
+*                          (C)  1996 ZETEX PLC
+*
+*   The copyright in this model  and  the design embodied belong to
+*   Zetex PLC ("Zetex"). It is supplied free of charge by Zetex for
+*   the purpose  of research  and design  and may be used or copied
+*   intact (including this notice) for that purpose only. All other
+*   rights  are  reserved.  The model  is believed  accurate but no
+*   condition or warranty as to its  merchantability or fitness for
+*   purpose  is  given  and  no liability  in respect of any use is
+*   accepted by Zetex PLC, its distributors or agent.
+*
+*
+*   Zetex PLC, Fields New Road, Chadderton, Oldham  OL9 8NP
+*   ZETEX   BZX84C6V8   Spice Model   Last Revision 1/10/96
+*
+
+* ---- vendor notice (copied intact) ----
+*
+* For later versions of Spice use the following parameter to obtain
+* better zener voltage variation over temperature.
+* TBV1=.47E-3
+*
+*                          (C)  1996 ZETEX PLC
+*
+*   The copyright in this model  and  the design embodied belong to
+*   Zetex PLC ("Zetex"). It is supplied free of charge by Zetex for
+*   the purpose  of research  and design  and may be used or copied
+*   intact (including this notice) for that purpose only. All other
+*   rights  are  reserved.  The model  is believed  accurate but no
+*   condition or warranty as to its  merchantability or fitness for
+*   purpose  is  given  and  no liability  in respect of any use is
+*   accepted by Zetex PLC, its distributors or agent.
+*
+*
+*   Zetex PLC, Fields New Road, Chadderton, Oldham  OL9 8NP
+*   ZETEX   BZX84C7V5   Spice Model   Last Revision 1/10/96
+*
+
+* ---- vendor notice (copied intact) ----
+*
+* For later versions of Spice use the following parameter to obtain
+* better zener voltage variation over temperature.
+* TBV1=.56E-3
+*
+*                          (C)  1996 ZETEX PLC
+*
+*   The copyright in this model  and  the design embodied belong to
+*   Zetex PLC ("Zetex"). It is supplied free of charge by Zetex for
+*   the purpose  of research  and design  and may be used or copied
+*   intact (including this notice) for that purpose only. All other
+*   rights  are  reserved.  The model  is believed  accurate but no
+*   condition or warranty as to its  merchantability or fitness for
+*   purpose  is  given  and  no liability  in respect of any use is
+*   accepted by Zetex PLC, its distributors or agent.
+*
+*
+*   Zetex PLC, Fields New Road, Chadderton, Oldham  OL9 8NP
+*   ZETEX   BZX84C8V2   Spice Model   Last Revision 1/10/96
+*
+
+* ---- vendor notice (copied intact) ----
+*
+* For later versions of Spice use the following parameter to obtain
+* better zener voltage variation over temperature.
+* TBV1=.61E-3
+*
+*                          (C)  1996 ZETEX PLC
+*
+*   The copyright in this model  and  the design embodied belong to
+*   Zetex PLC ("Zetex"). It is supplied free of charge by Zetex for
+*   the purpose  of research  and design  and may be used or copied
+*   intact (including this notice) for that purpose only. All other
+*   rights  are  reserved.  The model  is believed  accurate but no
+*   condition or warranty as to its  merchantability or fitness for
+*   purpose  is  given  and  no liability  in respect of any use is
+*   accepted by Zetex PLC, its distributors or agent.
+*
+*
+*   Zetex PLC, Fields New Road, Chadderton, Oldham  OL9 8NP
+*   ZETEX   BZX84C9V1   Spice Model   Last Revision 1/10/96
+*
+
+* ---- vendor notice (copied intact) ----
+*
+* For later versions of Spice use the following parameter to obtain
+* better zener voltage variation over temperature.
+* TBV1=.63E-3
+*
+*                          (C)  1996 ZETEX PLC
+*
+*   The copyright in this model  and  the design embodied belong to
+*   Zetex PLC ("Zetex"). It is supplied free of charge by Zetex for
+*   the purpose  of research  and design  and may be used or copied
+*   intact (including this notice) for that purpose only. All other
+*   rights  are  reserved.  The model  is believed  accurate but no
+*   condition or warranty as to its  merchantability or fitness for
+*   purpose  is  given  and  no liability  in respect of any use is
+*   accepted by Zetex PLC, its distributors or agent.
+*
+*
+*   Zetex PLC, Fields New Road, Chadderton, Oldham  OL9 8NP
+*                    Zetex Spice Model Library 1V0C1
+*           (Standard Version       Last Revision 28/June/93)
+*
+*
+*
+*   ZETEX  2N2222A Spice model   Last revision 9/12/92
+*
+
+*
+*ZETEX  2N7000  Spice model    Last revision  3/5/00
+*
+.SUBCKT 2N7000_ZX 3 4 5
+* Nodes        D G S
+M1 3 2 5 5 MOD1
+RG 4 2 343
+RL 3 5 6E6
+C1 2 5 23.5P
+C2 3 2 4.5P 
+D1 5 3 DIODE1
+*
+.MODEL MOD1 NMOS VTO=2.474 RS=1.68 RD=0.0 IS=1E-15 KP=0.296
++CBD=53.5P PB=1 LAMBDA=267E-6
+.MODEL DIODE1 D IS=1.254E-13 N=1.0207 RS=0.222
+.ENDS 2N7000_ZX
+
+* ---- vendor notice (copied intact) ----
+*
+* For later versions of Spice use the following parameter to obtain
+* better zener voltage variation over temperature.
+* TBV1=.63E-3
+*
+*                          (C)  1996 ZETEX PLC
+*
+*   The copyright in this model  and  the design embodied belong to
+*   Zetex PLC ("Zetex"). It is supplied free of charge by Zetex for
+*   the purpose  of research  and design  and may be used or copied
+*   intact (including this notice) for that purpose only. All other
+*   rights  are  reserved.  The model  is believed  accurate but no
+*   condition or warranty as to its  merchantability or fitness for
+
+*
+*ZETEX  BS170 Spice model    Last revision   3/5/00
+*
+.SUBCKT BS170_ZX 3 4 5
+*             D G S
+M1 3 2 5 5 N3306M
+RG 4 2 270
+RL 3 5 1.2E8
+C1 2 5 28E-12
+C2 3 2 3E-12 
+D1 5 3 N3306D
+*
+.MODEL N3306M NMOS VTO=1.824 RS=1.572 RD=1.436 IS=1E-15 KP=.1233
++CBD=35E-12 PB=1
+.MODEL N3306D D IS=5E-12 RS=.768
+.ENDS BS170_ZX

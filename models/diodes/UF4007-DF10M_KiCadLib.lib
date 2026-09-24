@@ -1,0 +1,19 @@
+* ==========================================================================
+* @part: UF4007 DF10M
+* @family: diodes
+* @source: KiCadLib
+* @url: https://github.com/kicad-spice-library/KiCad-Spice-Library (Models/Diode/DIODE2.lib)
+* @origin-file: KiCad-Spice-Library/Models/Diode/DIODE2.lib
+* @retrieved: 2026-09-24
+* @licence: no licence or copyright text in the vendor file (terms unknown)
+* @added-by: garv.singh
+* Definitions below are copied verbatim from the origin file.
+* ==========================================================================
+
+* ---- original file header ----
+* Unofficial LTSpice Wiki Page: http://ltwiki.org/index.php?title=Standard.dio Date of latest edit	02:34, 4 July 2013
+* ---- end of original file header ----
+
+.MODEL UF4007 D N=3.97671 IS=3.28772u RS=0.149734 EG=1.11 XTI=3 CJO=2.92655E-011 VJ=0.851862 M=0.334552 FC=0.5 TT=1.84973E-007 BV=1000 IBV=0.2 Iave=1 Vpk=1000 type=silicon
+
+.MODEL DI_DF10M D ( IS=4.42n RS=42.0m BV=1.00k IBV=10.0u CJO=65.0p M=0.333 N=1.70 TT=4.32u Vpk=1.00kV Iave=1.00A mfg=DiodesInc type=silicon )

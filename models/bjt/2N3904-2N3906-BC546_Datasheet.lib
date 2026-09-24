@@ -1,0 +1,37 @@
+* ==========================================================================
+* @part: 2N3904 2N3906 BC546
+* @family: bjt
+* @source: Datasheet
+* @url: https://www.d.umn.edu/~sburns/EE2212/2N3904.pdf (and others, see below)
+* @retrieved: 2026-09-24
+* @licence: datasheet parameters
+* @added-by: nav
+* ==========================================================================
+* ============================================================================
+* fairchild_datasheet_bjt.lib  --  flag: BOTH (native ngspice)
+* ----------------------------------------------------------------------------
+* Alternative, more detailed parameter sets published in datasheets.
+* Model names carry a suffix so they do not clash with ltspice_std_bjt.lib.
+* ============================================================================
+
+* Source: Fairchild 2N3904/MMBT3904/PZT3904 datasheet "Spice Model" box (2001, Rev A),
+*   e.g. https://www.d.umn.edu/~sburns/EE2212/2N3904.pdf
+*   "Fairchild pid=23 case=TO92 88-09-08 bam creation"
+* NOTE: the datasheet prints "Ise=6.734" (missing f); corrected to 6.734f as in
+*   Fairchild's own library.
+.model 2N3904_FCS NPN(Is=6.734f Xti=3 Eg=1.11 Vaf=74.03 Bf=416.4 Ne=1.259
++ Ise=6.734f Ikf=66.78m Xtb=1.5 Br=.7371 Nc=2 Isc=0 Ikr=0 Rc=1
++ Cjc=3.638p Mjc=.3085 Vjc=.75 Fc=.5 Cje=4.493p Mje=.2593 Vje=.75
++ Tr=239.5n Tf=301.2p Itf=.4 Vtf=4 Xtf=2 Rb=10)
+
+* Source: Fairchild 2N3906 parameters as quoted on forum.allaboutcircuits.com thread 3030
+.model 2N3906_FCS PNP(Is=1.41f Xti=3 Eg=1.11 Vaf=18.7 Bf=180.7 Ne=1.5 Ise=0 Ikf=80m
++ Xtb=1.5 Br=4.977 Nc=2 Isc=0 Ikr=0 Rc=2.5 Cjc=9.728p Mjc=.5776 Vjc=.75 Fc=.5
++ Cje=8.063p Mje=.3677 Vje=.75 Tr=33.42n Tf=179.3p Itf=.4 Vtf=4 Xtf=6 Rb=10)
+
+* Source: ngspice model page example (https://ngspice.sourceforge.io/modelparams.html)
+*SRC=BC546;BC546;BJTs NPN;Gen. Purpose;65V 100mA
+*   National 65 Volt  .5 Amp  260 MHz  SiNPN  Transistor  01-26-1991
+.MODEL BC546 NPN (IS=50.7F NF=1 BF=318 VAF=145 IKF=.3
++ ISE=15.9P NE=2 BR=4 NR=1 VAR=24 IKR=.45 RE=1.54 RB=6.17
++ RC=.617 XTB=1.5 CJE=20.8P CJC=8.33P TF=611P TR=138N)

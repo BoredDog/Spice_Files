@@ -1,0 +1,45 @@
+* ==========================================================================
+* @part: BAT85
+* @family: diodes
+* @source: Vishay
+* @url: https://www.vishay.com/doc?85805
+* @origin-file: vishay/BAT85.txt
+* @retrieved: 2026-09-24
+* @licence: notice: "Copyright: Thomatronik GmbH, Germany"
+* @added-by: garv.singh
+* @pins: bat85: 1 2
+* @patched: spiceconv dots (4 change(s))
+* The complete origin file follows (modified, see @patched).
+* ==========================================================================
+
+**********************************
+
+* Model created by               *
+
+*   Uni.Dipl.-Ing. Arpad Buermen *
+
+*   arpad.burmen@ieee.org        *
+
+* Copyright:                     *
+
+*   Thomatronik GmbH, Germany    *
+
+*   info@thomatronik.de          *
+
+**********************************
+
+* February 2001
+
+*   SPICE3
+
+.subckt bat85 1 2
+
+ddio 1 2 legd
+
+dgr 1 2 grd
+
+.model legd d is = 8.62316E-008 n = 1.15214 rs = 1.48252  eg = 0.590979 xti = 2.5  cjo = 1.43602E-011 vj = 0.250022 m = 0.365636 fc = 0.5  tt = 0.1e-9 bv = 33 ibv = 0.1 af = 1 kf = 0
+
+.model grd d is = 1E-015 n = 1.03925 rs = 0.869  eg = 1.18918 xti = 3.5
+
+.ends

@@ -1,0 +1,13 @@
+* index.lib -- include every core model file in one line:
+*     .include <path-to-repo>/models/index.lib
+* Nested paths below are relative to THIS file (tested in ngspice-47 and
+* LTspice 17.2.4). Needs the repo .spiceinit (ngbehavior=ltps) in ngspice.
+.include diodes/standard-diodes_LTspice.lib
+.include diodes/D1N4148_PSpiceEval.lib
+.include diodes/generic-diodes_Repo.lib
+.include bjt/standard-bjt_LTspice.lib
+.include bjt/2N3904-2N3906-BC546_Datasheet.lib
+.include mosfet/standard-vdmos_LTspice.lib
+.include jfet/standard-jfet_LTspice.lib
+.include opamps/UA741_MicroSim.lib
+.include passive/generic-passive_Repo.lib

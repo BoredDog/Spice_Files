@@ -1,0 +1,73 @@
+* ==========================================================================
+* @part: BZX84C16
+* @family: diodes
+* @source: Vishay
+* @url: https://www.vishay.com/doc?84093
+* @origin-file: vishay/BZX84C16.txt
+* @retrieved: 2026-09-24
+* @licence: notice: "Copyright: Thomatronik GmbH, Germany"
+* @added-by: garv.singh
+* @pins: bzx84c16: 1 9
+* @patched: spiceconv dots (7 change(s)), r-model (4 change(s))
+* The complete origin file follows (modified, see @patched).
+* ==========================================================================
+
+**********************************
+
+* Model created by               *
+
+*   Uni.Dipl.-Ing. Arpad Buermen *
+
+*   arpad.burmen@ieee.org        *
+
+* Copyright:                     *
+
+*   Thomatronik GmbH, Germany    *
+
+*   info@thomatronik.de          *
+
+**********************************
+
+* January 2001
+
+*   SPICE3
+
+*                    anode     cathode
+
+* Reverse direction: node 1 <- node 9
+
+.SUBCKT bzx84c16 1 9
+
+DF 1 9 DFMOD
+
+.MODEL DFMOD D N = 1.0941 IS = 2.67776E-014 RS = 0.96562  EG = 1.20192 XTI = 0.5  CJO = 4.58392E-011 VJ = 0.53125 M = 0.5 FC = 0.5  TT = 1E-008 TNOM = 25
+
+* Leakage
+
+RL 1 9 2.7216E+008 tc1=0 tc2=0
+
+
+* Breakdown
+
+ES 9 90 10 20 1
+
+DR1 90 31 DREV1 TEMP = 25
+
+.MODEL DREV1 D IS = 1E-015 N = 0.349955 RS = 9.87296 TNOM = 25
+
+VR1 31 1 0.00417897
+
+DR2 90 32 DREV2 TEMP = 25
+
+.MODEL DREV2 D IS = 1E-015 N = 0.261167 RS = 14.8107 TNOM = 25
+
+VR2 32 1 0.00011109
+
+VTRIM 20 0 0.257847
+
+IBVC 0 10 0.001
+
+RBVC 10 0 16200 tc1=0.000875
+
+
+.ENDS

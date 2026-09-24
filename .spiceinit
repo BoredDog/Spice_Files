@@ -1,0 +1,16 @@
+* .spiceinit for this SPICE model library
+* ngspice reads this file from the directory it is started in, or from $HOME.
+* KiCad honours it; Qucs-S (>= 24.3.0) also has a global compatibility setting.
+*
+* Translate LTspice + PSpice syntax in .include'd library files only
+* (keeps your own netlist native ngspice). Required for every file flagged
+* BOTH-lt or BOTH-ps in README.md -- e.g. "mfg=OnSemi" is a fatal error in
+* native mode.
+set ngbehavior=ltps
+*
+* For whole netlists exported from LTspice, use this instead:
+* set ngbehavior=ltpsa
+*
+* NOTE: the spelling is "ngbehavior" (no 'u'), and it must be set here or in
+* spinit -- not in a .control block / pre_set.
+set num_threads=4

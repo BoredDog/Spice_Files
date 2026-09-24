@@ -1,0 +1,74 @@
+* ==========================================================================
+* @part: BAT54
+* @family: diodes
+* @source: Nexperia
+* @url: https://assets.nexperia.com/documents/spice-model/BAT54.txt
+* @origin-file: manual/nexperia/BAT54.txt
+* @retrieved: 2026-09-24
+* @licence: no licence or copyright text in the vendor file (terms unknown)
+* @added-by: garv.singh
+* @pins: BAT54: 1 2
+* The complete origin file follows, unchanged.
+* ==========================================================================
+
+*
+*******************************************
+*
+*BAT54
+*
+*Nexperia
+*
+*Schottky barrier diodes
+*
+*
+*VRmax = 30V
+*
+* 
+*VFmax = 800mV @ IF = 100mA
+*IRmax = 2µA   @ VR = 25V
+*
+*
+*
+*
+*
+*  
+*
+*
+*
+*Package pinning does not match Spice model pinning.
+*Package: SOT23(TO-236AB)
+*
+*Package Pin 1: anode   
+*Package Pin 2: not connected
+*Package Pin 3: cathode
+*
+*
+*Extraction date (week/year): 28/2020
+*Simulator: SPICE3
+*
+*******************************************
+*#
+.SUBCKT BAT54 1 2
+R1 1 2 1.8E+07
+D1 1 2
++ DIODE1
+*
+*The resistor R1 does not reflect a  
+*physical device but improves only modeling  
+*in the reverse mode of operation.
+*       
+.MODEL DIODE1 D
++ IS = 2.117E-07
++ N = 1
++ BV = 56
++ IBV = 0.0005
++ RS = 2.7
++ CJO = 8E-12
++ VJ = 0.09
++ M = 0.31
++ FC = 0.5
++ TT = 0
++ EG = 0.69
++ XTI = 2
+.ENDS
+*

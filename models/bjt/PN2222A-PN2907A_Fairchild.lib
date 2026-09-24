@@ -1,0 +1,30 @@
+* ==========================================================================
+* @part: PN2222A PN2907A
+* @family: bjt
+* @source: Fairchild
+* @url: https://ngspice.sourceforge.io/model-parameters/MicroCap-LIBRARY.7z (Micro-Cap 12 library, Spectrum Software)
+* @origin-file: ngspice/MicroCap-LIBRARY/MicroCap-LIBRARY-for-ngspice/fairch.lib
+* @retrieved: 2026-09-24
+* @licence: no licence or copyright text in the vendor file (terms unknown)
+* @added-by: nav
+* Definitions below are copied verbatim from the origin file.
+* ==========================================================================
+
+* ---- original file header ----
+*BSS138 ELECTRICAL MODEL (SOT-23 Single N-Ch DMOS) 
+*-----------------------
+* ---- end of original file header ----
+
+*               Fairchild        pid=19          case=TO92 
+*               88-09-07 bam    creation
+.model PN2222A  NPN(Is=14.34f Xti=3 Eg=1.11 Vaf=74.03 Bf=255.9 Ne=1.307 
++               Ise=14.34f Ikf=.2847 Xtb=1.5 Br=6.092 Nc=2 Isc=0 Ikr=0 Rc=1 
++               Cjc=7.306p Mjc=.3416 Vjc=.75 Fc=.5 Cje=22.01p Mje=.377 Vje=.75 
++               Tr=46.91n Tf=411.1p Itf=.6 Vtf=1.7 Xtf=3 Rb=10) 
+
+*               Fairchild        pid=63          case=TO92 
+*               88-09-09 bam    creation
+.model PN2907A  PNP(Is=650.6E-18 Xti=3 Eg=1.11 Vaf=115.7 Bf=231.7 Ne=1.829 
++               Ise=54.81f Ikf=1.079 Xtb=1.5 Br=3.563 Nc=2 Isc=0 Ikr=0 Rc=.715 
++               Cjc=14.76p Mjc=.5383 Vjc=.75 Fc=.5 Cje=19.82p Mje=.3357 Vje=.75 
++               Tr=111.3n Tf=603.7p Itf=.65 Vtf=5 Xtf=1.7 Rb=10)

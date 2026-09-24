@@ -1,0 +1,21 @@
+This repository contains files under DIFFERENT terms. There is no single
+licence for the whole repository.
+
+1. Files written for this repository -- the documentation, .spiceinit, and
+   model files named *_Repo.lib -- are released under the MIT licence,
+   see LICENSES/MIT.txt.
+
+2. Every other file under models/ was published by a third party
+   (semiconductor vendors, simulator vendors, model developers, community
+   collections). Those files are NOT covered by the MIT licence and are NOT
+   relicensed here. They remain under their owners' terms, which are quoted
+   in each file's header ("* @licence:") and summarised in NOTICE.md. Each
+   file's header also gives the original download location ("* @url:").
+
+The models are collected for non-commercial education and research
+(courses and projects at IIIT Hyderabad). They are provided as is, without
+any warranty; use them at your own risk. Where possible, prefer downloading a
+model directly from its publisher (see the @url line).
+
+Copyright holders: if you do not want a file to be included here, please open
+an issue on this repository and it will be removed promptly.

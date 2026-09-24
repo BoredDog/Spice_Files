@@ -1,0 +1,26 @@
+* ==========================================================================
+* @part: 2SC5200 2SA1943 2SC1815 2SA1015
+* @family: bjt
+* @source: LTwiki
+* @url: https://github.com/kicad-spice-library/KiCad-Spice-Library (Models/Transistor/BJT/BJT.lib)
+* @origin-file: KiCad-Spice-Library/Models/Transistor/BJT/BJT.lib
+* @retrieved: 2026-09-24
+* @licence: no licence or copyright text in the vendor file (terms unknown)
+* @added-by: garv.singh
+* @patched: 1 helper subckt/model name(s) suffixed with '__2SC52002SA19432SC18152SA1015' so this file can be included together with other files
+* Definitions below are copied verbatim from the origin file.
+* ==========================================================================
+
+* ---- original file header ----
+* Unofficial LTSpice Wiki Page: http://ltwiki.org/index.php?title=Standard.dio Date of latest edit	12:47, 24 February 2014
+* ---- end of original file header ----
+
+.model 2SC5200 ako:2sc3281__2SC52002SA19432SC18152SA1015 NPN( Vceo=200V ICrating=15A mfg=Toshiba)
+
+.model 2sc3281__2SC52002SA19432SC18152SA1015 npn IS=229.07p BF=135 NF=1.257 VAF=50 IKF=20 ISE=5.222p NE=1.392 BR=1 NR=1.411 VAR=75 NC=2 RB=4 RE=2m RC=0.0389 CJE=6050p VJE=0.75 MJE=0.234 TF=5.3n XTF=0.4 ITF=4 CJC=440.35p VJC=0.75 MJC=0.233 TR=3.6e-8 XTB=1.08 VCEO=200V ICrating=15A MFG=Toshiba
+
+.model 2SC1815 NPN(Is=2.04f Xti=3 Eg=1.11 Vaf=6 Bf=400 Ikf=20m Xtb=1.5 Br=3.377 Rc=1 Cjc=1p Mjc=.3333 Vjc=.75 Fc=.5 Cje=25p Mje=.3333 Vje=.75 Tr=450n Tf=20n Itf=0 Vtf=0 Xtf=0 VCEO=45V ICrating=150M MFG=Toshiba)
+
+.model 2SA1015 PNP(Is=295.1E-18 Xti=3 Eg=1.11 Vaf=100 Bf=110 Xtb=1.5 Br=10.45 Rc=15 Cjc=66.2p Mjc=1.054 Vjc=.75 Fc=.5 Cje=5p Mje=.3333 Vje=.75 Tr=10n Tf=1.661n VCEO=45V ICrating=150M MFG=Toshiba)
+
+.MODEL 2SA1943 PNP (IS=3.5476E-11 BF=159.9 VAF=60 IKF=2.8370 ISE=2.5119E-10 NE=2 BR=25.75 NR=1.011 VAR=11.07 IKR=0.3548 ISC=7.9433E-11 NC=1.37 RE=0.06 RB=2.74 RBM=0.0381 IRB=3.6308m RC=0.01 CJE=4.1783n VJE=0.6354 MJE=0.3374 CJC=1.1383n VJC=0.5 MJC=0.3699 XCJC=0.7624 FC=0.5 EG=1.1751 XTB=1.5306 XTI=3.0)

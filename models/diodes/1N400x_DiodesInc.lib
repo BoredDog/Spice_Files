@@ -1,0 +1,32 @@
+* ==========================================================================
+* @part: 1N4001-1N4007
+* @family: diodes
+* @source: DiodesInc
+* @url: https://www.diodes.com/assets/Spice-Models/spicemodels-all.txt
+* @origin-file: diodes/spicemodels-all.txt
+* @retrieved: 2026-09-24
+* @licence: no licence or copyright text in the vendor file (terms unknown)
+* @added-by: nav
+* Definitions below are copied verbatim from the origin file.
+* ==========================================================================
+
+.MODEL DI_1N4001 D  ( IS=76.9p RS=42.0m BV=50.0 IBV=5.00u
++ CJO=39.8p  M=0.333 N=1.45 TT=4.32u )
+
+.MODEL DI_1N4002 D  ( IS=76.9p RS=42.0m BV=100 IBV=5.00u
++ CJO=39.8p  M=0.333 N=1.45 TT=4.32u )
+
+.MODEL DI_1N4003 D  ( IS=76.9p RS=42.0m BV=200 IBV=5.00u
++ CJO=39.8p  M=0.333 N=1.45 TT=4.32u )
+
+.MODEL DI_1N4004 D  ( IS=76.9p RS=42.0m BV=400 IBV=5.00u
++ CJO=39.8p  M=0.333 N=1.45 TT=4.32u )
+
+.MODEL DI_1N4005 D  ( IS=76.9p RS=42.0m BV=600 IBV=5.00u
++ CJO=26.5p  M=0.333 N=1.45 TT=4.32u )
+
+.MODEL DI_1N4006 D  ( IS=76.9p RS=42.0m BV=800 IBV=5.00u
++ CJO=26.5p  M=0.333 N=1.45 TT=4.32u )
+
+.MODEL DI_1N4007 D  ( IS=76.9p RS=42.0m BV=1.00k IBV=5.00u
++ CJO=26.5p  M=0.333 N=1.45 TT=4.32u )

@@ -1,0 +1,43 @@
+* ==========================================================================
+* @part: 2W04G W04G DF04M bridges
+* @family: diodes
+* @source: Bordodynov
+* @url: https://github.com/kicad-spice-library/KiCad-Spice-Library (Bordodynov LTspice library, Models/uncategorized/Bordodynovs Electronics Lib)
+* @origin-file: KiCad-Spice-Library/Models/uncategorized/Bordodynovs Electronics Lib/sub/BridgeRectifier.lib
+* @retrieved: 2026-09-24
+* @licence: notice: "Copyright (c) U.A.V. aka Skywarrior 2005. All rights reserved."
+* @added-by: nav
+* @pins: 2W04G: 1 2 3 4
+* @pins: W04G: 1 2 3 4
+* @pins: DF04M: 1 2 3 4
+* Definitions below are copied verbatim from the origin file.
+* ==========================================================================
+
+* ---- original file header ----
+* Copyright (c) U.A.V. aka Skywarrior 2005.  All rights reserved.
+*
+* ---- end of original file header ----
+
+.subckt 2W04G 1 2 3 4 
+D1 2 4 DI_2W04G
+D2 1 4 DI_2W04G
+D3 3 2 DI_2W04G
+D4 3 1 DI_2W04G
+.MODEL DI_2W04G D (IS=28.4n RS=21.1m BV=400 IBV=5.00u CJO=29.6p M=0.333 N=1.95 TT=4.32u)
+.ends 2W04G
+
+.subckt DF04M 1 2 3 4 
+D1 2 4 DI_DF04M
+D2 1 4 DI_DF04M
+D3 3 2 DI_DF04M
+D4 3 1 DI_DF04M
+.MODEL DI_DF04M D (IS=4.42n RS=42.0m BV=400 IBV=10.0u CJO=65.0p M=0.333 N=1.70 TT=4.32u)
+.ends DF04M
+
+.subckt W04G  1 2 3 4 
+D1 2 4 DI_W04G
+D2 1 4 DI_W04G
+D3 3 2 DI_W04G
+D4 3 1 DI_W04G
+.MODEL DI_W04G D (IS=8.63u RS=28.0m BV=400.0 IBV=5.00u CJO=22.5p M=0.333 N=3.21 TT=4.32u)
+.ends W04G

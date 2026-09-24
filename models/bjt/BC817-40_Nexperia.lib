@@ -1,0 +1,106 @@
+* ==========================================================================
+* @part: BC817-40
+* @family: bjt
+* @source: Nexperia
+* @url: https://assets.nexperia.com/documents/spice-model/BC817-40.txt
+* @origin-file: manual/nexperia/BC817-40.txt
+* @retrieved: 2026-09-24
+* @licence: no licence or copyright text in the vendor file (terms unknown)
+* @added-by: garv.singh
+* @pins: BC817_40: 1 2 3
+* The complete origin file follows, unchanged.
+* ==========================================================================
+
+**********************************************************
+*
+* BC817_40
+*
+* Nexperia
+*
+* General purpose NPN transistor
+* IC   = 500 mA
+* VCEO = 45 V 
+* hFE  = 250 - 600 @ 1V/100mA
+* 
+*
+*
+*
+* Package pinning does not match Spice model pinning.
+* Package: SOT 23
+* 
+* Package Pin 1: Base
+* Package Pin 2: Emitter
+* Package Pin 3: Collector
+* 
+*
+* Extraction date (week/year): 42/2018
+* Spicemodel includes temperature dependency
+*
+**********************************************************
+*# 
+*
+* Diode D1, Transistor Q2 and resistor RQ 
+* are dedicated to improve modeling of quasi
+* saturation area and reverse mode operation
+* and do not reflect physical devices.
+*
+.SUBCKT BC817_40 1 2 3
+Q1 1 2 3 Transistor 0.918
+Q2 11 2 3 Transistor 0.08204
+RQ 1 11 76.66
+D1 2 1 Diode
+*
+.MODEL Transistor NPN
++ IS = 5.244E-014
++ NF = 0.9753
++ ISE = 1.62E-015
++ NE = 1.301
++ BF = 440
++ IKF = 0.5843
++ VAF = 48.46
++ NR = 0.9751
++ ISC = 1.068E-014
++ NC = 1.357
++ BR = 50.35
++ IKR = 3.385
++ VAR = 25
++ RB = 43
++ IRB = 0.0003908
++ RBM = 1.201
++ RE = 0.1312
++ RC = 0.2327
++ XTB = 1.338
++ EG = 1.11
++ XTI = 6.013
++ CJE = 4.377E-011
++ VJE = 0.6604
++ MJE = 0.3252
++ TF = 6.08E-010
++ XTF = 10.18
++ VTF = 2
++ ITF = 1.09
++ PTF = 0
++ CJC = 8.628E-012
++ VJC = 0.5162
++ MJC = 0.3621
++ XCJC = 1
++ TR = 3.5E-007
++ CJS = 0
++ VJS = 0.75
++ MJS = 0.333
++ FC = 0.9552
+.MODEL Diode D
++ IS = 2.029E-015
++ N = 0.9739
++ BV = 1000
++ IBV = 0.001
++ RS = 829.9
++ CJO = 0
++ VJ = 1
++ M = 0.5
++ FC = 0
++ TT = 0
++ EG = 1.11
++ XTI = 3
+.ENDS
+*

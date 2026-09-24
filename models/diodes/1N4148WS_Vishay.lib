@@ -1,0 +1,67 @@
+* ==========================================================================
+* @part: 1N4148WS
+* @family: diodes
+* @source: Vishay
+* @url: https://www.vishay.com/doc?85515
+* @origin-file: vishay/1N4148WS.txt
+* @retrieved: 2026-09-24
+* @licence: notice: "Copyright: Thomatronik GmbH, Germany"
+* @added-by: garv.singh
+* @pins: d1n4148ws: 1 2
+* @patched: spiceconv dots (6 change(s)), r-model (4 change(s)), func-space (1 change(s))
+* The complete origin file follows (modified, see @patched).
+* ==========================================================================
+
+**********************************
+
+* Model created by               *
+
+*   Uni.Dipl.-Ing. Arpad Buermen *
+
+*   arpad.burmen@ieee.org        *
+
+* Copyright:                     *
+
+*   Thomatronik GmbH, Germany    *
+
+*   info@thomatronik.de          *
+
+**********************************
+
+* March 2001
+
+*   SPICE3
+
+.subckt d1n4148ws 1 2
+
+ddio 1 10 legd
+
+.model legd d is = 2.36581E-008 n = 2.60607 rs = 0.97235  eg = 1.1477 xti = 3.84354  cjo = 4.00501E-012 vj = 5 m = 0.25 fc = 0.5  tt = 1.368423e-008 af = 1 kf = 0
+
+vf 10 20 0
+
+bf 20 2 v=600 * i(vf) / ( abs( v(51) * 10 / v(30) ) + 1 )
+
+i1 0 30 1e-3
+
+r1 30 0 25.86417 tc1=3.331667e-003 tc2=0
+
+
+h2 50 0 vf 500
+
+rtf1 50 51 10000
+
+ctf 51 0 240p
+
+rtf2 51 0 1E+007
+
+dbv1 1 90 dbvmod
+
+dbv2 2 90 dbvmod
+
+.model dbvmod d is=1e-15 n=2 rs=1 bv=110 ibv=0.1
+
+rl 1 2 6e9 tc1=-0.0068 tc2=0
+
+
+.ends

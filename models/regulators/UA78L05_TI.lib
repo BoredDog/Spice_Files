@@ -1,0 +1,73 @@
+* ==========================================================================
+* @part: UA78L05
+* @family: regulators
+* @source: TI
+* @url: https://www.ti.com/lit/zip/SLVME11
+* @origin-file: ti/UA78L/SLVME11/ua78l_trans.lib
+* @retrieved: 2026-09-24
+* @licence: no licence or copyright text in the vendor file (terms unknown)
+* @added-by: garv.singh
+* @pins: UA78L_5V_TRANS: IN OUT COMMON
+* @notes: 100 mA 5 V regulator (78L05)
+* @patched: 2 helper subckt/model name(s) suffixed with '__UA78L05' so this file can be included together with other files
+* The complete origin file follows (modified, see @patched).
+* ==========================================================================
+
+.SUBCKT UA78L_5V_TRANS IN OUT COMMON
+E_U1_ABM1         U1_N2396661 0 VALUE { {MIN(V(U1_VXX),
++  (V(U1_VZZ)+(ILIM*ROUT)))}    }
+R_U1_R7         U1_VXX U1_N222644  1e6  
+R_U1_R4         U1_N222528 U1_VXX  {1m*1e6}  
+X_U1_F1    U1_N359447 U1_VZZ U1_N222644 U1_VYY UA78L_U1_F1__UA78L05 
+V_U1_U1_V3         U1_U1_N3524503 0 {UHYS}
+E_U1_U1_ABM8         U1_U1_N08164 0 VALUE {
++  IF(V(U1_UVLO_OK)>0.6,V(U1_U1_REFER),0)    }
+E_U1_U1_ABM4         U1_U1_N09035 0 VALUE { V(U1_U1_REF)  
++ * (ABS(V(OUT)) + 1e-6)  
++ / (ABS(V(U1_N222934)) + 1e-6)  }
+V_U1_U1_V4         U1_U1_N352510 0 {UVLO}
+C_U1_U1_C1         0 U1_U1_REF  {1e-6*SQRT(TTRN)} IC=0 
+R_U1_U1_R1         U1_N283278 U1_U1_REF  1G  
+E_U1_U1_ABM9         U1_U1_REFER 0 VALUE { {VREF}    }
+E_U1_U1_E8         U1_U1_DROP 0 TABLE { V(U1_LOAD, 0) } 
++ ( (1m,1.5) (40m,1.7) (70m,1.9) (100m,2.1)  )
+R_U1_U1_R3         U1_U1_N08164 U1_U1_REF  {3.333e5*SQRT(TTRN)} TC=0,0 
+R_U1_U1_R2         U1_N283278 U1_U1_ERROR_AMP_OUT  1G  
+X_U1_U1_U2         U1_N222644 U1_U1_N352510 U1_U1_N3524503 U1_UVLO_OK
++  COMPHYS_BASIC_GEN__UA78L05 PARAMS: VDD=1 VSS=0 VTHRESH=0.5
+R_U1_U1_R5         U1_U1_N095641 U1_N222528  10 TC=0,0 
+R_U1_U1_R4         U1_U1_N09035 U1_U1_ERROR_AMP_OUT  10 TC=0,0 
+E_U1_U1_ABM5         U1_U1_N095641 0 VALUE { MIN(V(U1_U1_ERROR_AMP_OUT),  
++ MAX(V(U1_N222644)-V(U1_U1_DROP), 0))   }
+C_U1_U1_C3         0 U1_N222528  1n  
+C_U1_U1_C2         0 U1_U1_ERROR_AMP_OUT  1n  
+C_U1_C1         U1_VXX U1_N222644  {1/(6.28*RINP*POLE)}  
+R_U1_R2         U1_N283278 U1_N222934  30k  
+C_U1_C2         U1_VXX U1_N222528  {1/(6.28*PSRR*RINP*ZERO)}  
+R_U1_R10         COMMON U1_N283278  1m TC=0,0 
+C_U1_C3         0 U1_VYY  1n  
+R_U1_R9         OUT U1_N287997  1m TC=0,0 
+V_U1_Vload         U1_VZZ U1_N287997 0Vdc
+R_U1_R1         U1_N222934 U1_N287997  270k  
+E_U1_ABM2         U1_LOAD 0 VALUE { I(V_U1_Vload)    }
+R_U1_R6         U1_N2396661 U1_VYY  10 TC=0,0 
+R_U1_R8         IN U1_N222644  1m TC=0,0 
+R_U1_R5         U1_N359447 U1_VYY  {ROUT}  
+.PARAM  zero=5meg uhys=0 ehys=0.2 psrr=1m vref=0.5 uvlo=2 ttrn=1u venb=1.4
++  pole=13k ilim=1.4 rout=50m rinp=1e6
+
+.ends UA78L_5V_TRANS
+
+.subckt UA78L_U1_F1__UA78L05 1 2 3 4  
+F_U1_F1         3 4 VF_U1_F1 1
+VF_U1_F1         1 2 0V
+.ends UA78L_U1_F1__UA78L05
+
+.SUBCKT COMPHYS_BASIC_GEN__UA78L05 INP INM HYS OUT PARAMS: VDD=1 VSS=0 VTHRESH=0.5	
+EIN INP1 INM1 INP INM 1 
+EHYS INP1 INP2 VALUE { IF( V(1) > {VTHRESH},-V(HYS),0) }
+EOUT OUT 0 VALUE { IF( V(INP2)>V(INM1), {VDD} ,{VSS}) }
+R1 OUT 1 1
+C1 1 0 5n
+RINP1 INP1 0 1K
+.ENDS COMPHYS_BASIC_GEN__UA78L05

@@ -1,0 +1,56 @@
+* ==========================================================================
+* @part: 2N5457 2N5458 BF245A BF245B BF245C J111 J112 J113 MPF102
+* @family: jfet
+* @source: MicroCap
+* @url: https://ngspice.sourceforge.io/model-parameters/MicroCap-LIBRARY.7z (Micro-Cap 12 library, Spectrum Software)
+* @origin-file: ngspice/MicroCap-LIBRARY/MicroCap-LIBRARY-for-ngspice/jfet.lib
+* @retrieved: 2026-09-24
+* @licence: no licence or copyright text in the vendor file (terms unknown)
+* @added-by: nav
+* Definitions below are copied verbatim from the origin file.
+* ==========================================================================
+
+* ---- original file header ----
+*****
+* JFET.LIB Spectrum Software Bill Steele
+*****
+*** N-Channel JFET Process 52
+* ---- end of original file header ----
+
+*** N-Channel JFET Process 55
+.MODEL 2N5457 NJF (VTO=-2.713168 BETA=28.519268m LAMBDA=10m IS=10f
++ RS=177.127857 CGD=4.191359p CGS=5.347658p PB=967.073084m KF=0.01401f
++ AF=500.127534m)
+
+*** N-Channel JFET Process 55
+.MODEL 2N5458 NJF (VTO=-2.713168 BETA=28.519268m LAMBDA=10m IS=10f
++ RS=177.127857 CGD=4.191359p CGS=5.347658p PB=967.073084m KF=0.01401f
++ AF=500.127534m)
+
+*** N-Channel JFET Process 50
+.MODEL BF245A NJF (VTO=-3.061588 BETA=286.155879m LAMBDA=20m IS=10f
++ RS=239.291052 CGD=1.542479p CGS=2.567003p PB=1.49 KF=7.905907f AF=499.953m)
+
+*** N-Channel JFET Process 50
+.MODEL BF245B NJF (VTO=-3.061588 BETA=286.155879m LAMBDA=20m IS=10f
++ RS=239.291052 CGD=1.542479p CGS=2.567003p PB=1.49 KF=7.905907f AF=499.953m)
+
+*** N-Channel JFET Process 50
+.MODEL BF245C NJF (VTO=-3.061588 BETA=286.155879m LAMBDA=20m IS=10f
++ RS=239.291052 CGD=1.542479p CGS=2.567003p PB=1.49 KF=7.905907f AF=499.953m)
+
+*** N-Channel JFET Process 51
+.MODEL J111 NJF (VTO=-2.81041 BETA=4.644731m LAMBDA=10m IS=10f RS=2.483091
++ CGD=5.321821p CGS=9.310367p PB=2.449314 KF=1.462538E-018 AF=499.910353m)
+
+*** N-Channel JFET Process 51
+.MODEL J112 NJF (VTO=-2.81041 BETA=4.644731m LAMBDA=10m IS=10f RS=2.483091
++ CGD=5.321821p CGS=9.310367p PB=2.449314 KF=1.462538E-018 AF=499.910353m)
+
+*** N-Channel JFET Process 51
+.MODEL J113 NJF (VTO=-2.81041 BETA=4.644731m LAMBDA=10m IS=10f RS=2.483091
++ CGD=5.321821p CGS=9.310367p PB=2.449314 KF=1.462538E-018 AF=499.910353m)
+
+*** N-Channel JFET Process 50
+.MODEL MPF102 NJF (VTO=-3.061588 BETA=286.155879m LAMBDA=20m IS=10f
++ RS=239.291052 CGD=1.542479p CGS=2.567003p PB=1.49 KF=7.905907f AF=499.953m)

@@ -1,0 +1,171 @@
+* ==========================================================================
+* @part: LM1086-5P0
+* @family: regulators
+* @source: TI
+* @url: https://www.ti.com/lit/zip/SNVMB35
+* @origin-file: ti/LM1086/SNVMB35/LM1086-5P0_TRANS.LIB
+* @retrieved: 2026-09-24
+* @licence: condition: "The model is provided solely on an "as is" basis."; notice: "(C) Copyright 2016 Texas Instruments Incorporated. All rights reserved."
+* @added-by: garv.singh
+* @pins: LM1086-5P0_TRANS: INPUT GND OUTPUT
+* @notes: 1.5 A LDO, 5 V
+* @patched: 9 helper subckt/model name(s) suffixed with '__LM10865P0' so this file can be included together with other files
+* The complete origin file follows (modified, see @patched).
+* ==========================================================================
+
+* PSpice Model Editor - Version 16.2.0
+*$
+* LM1086-5P0
+*****************************************************************************
+* (C) Copyright 2016 Texas Instruments Incorporated. All rights reserved.
+*****************************************************************************
+** This model is designed as an aid for customers of Texas Instruments.
+** TI and its licensors and suppliers make no warranties, either expressed
+** or implied, with respect to this model, including the warranties of
+** merchantability or fitness for a particular purpose. The model is
+** provided solely on an "as is" basis. The entire risk as to its quality
+** and performance is with the customer.
+*****************************************************************************
+*
+** Released by: WEBENCH Design Center, Texas Instruments Inc.
+* Part: LM1086-5P0
+* Date: 28DEC2016 
+* Model Type: Transient
+* Simulator: PSPICE
+* Simulator Version: 16.2.0.p001
+* EVM Order Number: NA
+* EVM User's Guide: NA
+* Datasheet: SNVS039J –JUNE 2000–REVISED APRIL 2015
+*
+* Model Version: Final 1.00
+*
+*****************************************************************************
+*
+* Updates:
+*
+* Final 1.00
+* Release to Web
+*
+*****************************************************************************
+*
+* Model Usage Notes:
+*
+* A. Features have been modelled
+*	1. Startup & Shutdown Response 
+*	2. 2.7A Peak Current Limit
+*	3. Dropout Voltage vs Output Current  
+*	4. Line & Load Transient Response 
+*	5. VOUT vs VIN Plot
+*	6. VOUT vs IOUT Plot
+*
+* B. Features haven't been modelled
+*	1. Ground pin quiescent current
+*	2. Ripple Regulation Response vs Output Current/Frequency 
+*	3. Temperature dependent characteristics & Output Noise Voltage
+*   4. This model do not support the inverting configuration.
+*****************************************************************************
+.SUBCKT LM1086-5P0_TRANS INPUT GND OUTPUT
+X_F1    VZZ N16902334 N16902368 VYY LM1086-5P0V_F1__LM10865P0 
+X_U8         INPUT OUTPUT ILIM 0 my_ETABLE__LM10865P0
+C_C3         VYY 0  100p  
+X_S1    N16902539 0 INPUT N16902368 LM1086-5P0V_S1__LM10865P0 
+R_R5         VZZ VYY  {ROUT}  
+E_ABM2         N16902633 0 VALUE { IF(V(IN_OK) > 0.5, 1, 0)    }
+C_C6         N16902368 0  100n  
+X_S2    IN_OK 0 N16902267 OUTPUT LM1086-5P0V_S2__LM10865P0 
+C_C5         N16902539 0  1n  
+R_R7         N16902539 N16902633  100 TC=0,0 
+R_Rbot         ADJ GND  363 TC=0,0 
+R_Rtop         OUTPUT ADJ  121 TC=0,0 
+R_U1_R6         U1_N15543801 U1_VDO  10  
+R_U1_R2         0 U1_N15555780  1G  
+E_U1_ABM4         U1_N15555938 0 VALUE {
++  V(U1_N15543421)*(ABS(V(OUTPUT))/(ABS(V(OUTPUT)-V(ADJ))))    }
+E_U1_ABM6         U1_N15543747 0 VALUE { IF(V(IN_OK) > 0.5, V(U1_N15543395), 0)
++     }
+R_U1_R1         0 U1_N15543421  1G  
+V_U1_V1         U1_N15543395 0 1.25
+C_U1_C4         U1_VDO 0  1n  TC=0,0 
+E_U1_E3         U1_N15543801 0 TABLE { V(ISENSE, 0) } 
++ ( (0,0.9)(0.5,1)((1,1.1)(1.25,1.2)(1.5,1.3) )
+V_U1_V5         U1_N15543883 0 1.01
+R_U1_R5         U1_N15543687 N16902490  1 TC=0,0 
+X_U1_U7         INPUT U1_N15543883 IN_OK COMP_BASIC_GEN__LM10865P0 PARAMS: VDD=1 VSS=0
++  VTHRESH=0.5
+C_U1_C3         N16902490 0  10p  
+E_U1_ABM5         U1_N15543687 0 VALUE { MIN(V(U1_N15555780),  
++ MAX(V(INPUT) - V(U1_VDO), 0))   }
+C_U1_C2         U1_N15555780 0  10p  
+C_U1_C1         U1_N15543421 0  {1e-6*SQRT(TTRN)}  
+R_U1_R4         U1_N15555938 U1_N15555780  1 TC=0,0 
+R_U1_R3         U1_N15543747 U1_N15543421  {3.333e5*SQRT(TTRN)} TC=0,0 
+R_R6         N16902639 VYY  10 TC=0,0 
+E_ABM1         N16902639 0 VALUE { MIN(V(VXX), (V(Vzz)+(V(ILIM)*ROUT)))    }
+X_U2         0 OUTPUT D_D__LM10865P0 PARAMS:
+R_R2         N16902490 VXX  {PSRR*RINP}  
+C_C1         VXX N16902368  {1/(6.28*RINP*POLE)}  
+C_C2         N16902490 VXX  {1/(6.28*PSRR*RINP*ZERO*1)}  
+X_H1    N16902334 N16902267 ISENSE 0 LM1086-5P0V_H1__LM10865P0 
+R_R1         N16902368 VXX  {RINP}  
+.PARAM  psrr=316.227u pole=1k rinp=10e6 zero=100k rout=1m ttrn=1u vref=1.25
+.ENDS LM1086-5P0_TRANS
+*$
+.subckt LM1086-5P0V_F1__LM10865P0 1 2 3 4  
+F_F1         3 4 VF_F1 1
+VF_F1         1 2 0V
+.ends LM1086-5P0V_F1__LM10865P0
+*$
+.subckt LM1086-5P0V_S1__LM10865P0 1 2 3 4  
+S_S1         3 4 1 2 _S1
+RS_S1         1 2 1G
+.MODEL         _S1 VSWITCH Roff=100 Ron=10 Voff=0.2 Von=0.8
+.ends LM1086-5P0V_S1__LM10865P0
+*$
+.subckt LM1086-5P0V_S2__LM10865P0 1 2 3 4  
+S_S2         3 4 1 2 _S2
+RS_S2         1 2 1G
+.MODEL         _S2 VSWITCH Roff=100E6 Ron=1m Voff=0.2 Von=0.8
+.ends LM1086-5P0V_S2__LM10865P0
+*$
+.subckt LM1086-5P0V_H1__LM10865P0 1 2 3 4  
+H_H1         3 4 VH_H1 1
+VH_H1         1 2 0V
+.ends LM1086-5P0V_H1__LM10865P0
+***************************** Basic Components *****************************
+*$
+.SUBCKT COMP_BASIC_GEN__LM10865P0 INP INM Y PARAMS: VDD=1 VSS=0 VTHRESH=0.5	
+E_ABM Yint 0 VALUE {IF (V(INP) > 
++ V(INM), {VDD},{VSS})}
+R1 Yint Y 1
+C1 Y 0 1n
+.ENDS COMP_BASIC_GEN__LM10865P0
+*$
+.SUBCKT D_D__LM10865P0 1 2
+D1 1 2 DD1
+.MODEL dd1 d (Is = 1E-15 N = 0.1 TT = 10p)
+.ENDS D_D__LM10865P0
+*$
+.SUBCKT RVAR__LM10865P0 101 102 201 202 PARAMS: RREF=1
+* nodes : 101 102 : nodes between which variable resistance is placed
+* 201 202 : nodes to whose voltage the resistance is proportional
+* parameters : rref : reference value of the resistance
+rin 201 202 1G; input resistance
+r 301 0 {rref}
+fcopy 0 301 vsense 1; copy output current thru Z
+eout 101 106 poly(2) 201 202 301 0 0 0 0 0 1; multiply VoverZ with Vctrl
+vsense 106 102 0; sense iout
+.ENDS RVAR__LM10865P0
+*$
+.SUBCKT D_D1__LM10865P0 1 2
+D1 1 2 DD1
+.MODEL DD1 D (IS = 1E-15 N = 0.1 TT = 10p)
+.ENDS D_D1__LM10865P0
+*$
+.SUBCKT my_ETABLE__LM10865P0 IN+ IN- OUT+ OUT- 
+E_E1 OUT+ OUT- TABLE { V(IN+, IN-) } = (0.122,0.122)(1.102,1.073)(1.29, 1.5)(1.959,1.817)
++ (2.571,2.378)(3.184,2.524)(3.551,2.598)(4.286,2.707)(7.469,2.720)
++ (8.082,2.659)(9.551,2.402)(10.898,2.183)(12.000,1.988)(13.714,1.634)
++ (16.041,1.171)(16.898,0.939)(18.122,0.707)(18.612,0.537)(18.980,0.280)
++ (19.347,0.134)(30.000,0.110)
+.ENDS my_ETABLE__LM10865P0
+*$

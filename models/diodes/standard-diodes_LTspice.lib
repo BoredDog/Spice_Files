@@ -1,0 +1,56 @@
+* ==========================================================================
+* @part: 1N4148 1N914 1N4007 1N5817 1N5818 1N5819 BAT54 1N750 BZX84C12L QTLP690C NSPW500BS 1N34A LedBLUE LedWHITE
+* @family: diodes
+* @source: LTspice
+* @url: LTspice lib/cmp/standard.dio (https://ltwiki.org/index.php?title=Standard.dio)
+* @retrieved: 2026-09-24
+* @licence: (c) Linear Technology / Analog Devices, all rights reserved; attributed lines
+* @added-by: nav
+* ==========================================================================
+* ============================================================================
+* ltspice_std_diodes.lib  --  flag: BOTH-lt
+* ----------------------------------------------------------------------------
+* Source: LTspice lib/cmp/standard.dio (author Mike Engelhardt).
+*   "Copyright (c) 1999-2008 Linear Technology Corporation. All rights reserved."
+*   (Linear Technology is now part of Analog Devices, Inc.)
+* Lines below were checked character-for-character against the standard.dio
+* shipped with LTspice 17.2.4 for macOS (2026-09-24) unless marked [ltwiki].
+* [ltwiki] = taken from https://ltwiki.org/index.php?title=Standard.dio
+*            (older LTspice release); NOT present in the LTspice 17.2.4 library.
+* Redistributed as individual attributed lines for non-commercial university
+* teaching/research only -- see NOTICE.md.
+*
+* Iave, Vpk, mfg, type are LTspice informational fields.
+* ngspice: needs "set ngbehavior=lt|ltps|ltpsa" (the repo .spiceinit does this).
+*   In native ngspice mode "mfg=OnSemi" is a FATAL error ("Undefined parameter").
+*   In lt mode, mfg/type are dropped and Iave/Vpk print "unrecognized parameter
+*   - ignored" warnings, which are harmless.
+* ============================================================================
+
+* --- small-signal switching ---
+.model 1N914 D(Is=2.52n Rs=.568 N=1.752 Cjo=4p M=.4 tt=20n Iave=200m Vpk=75 mfg=OnSemi type=silicon)
+.model 1N4148 D(Is=2.52n Rs=.568 N=1.752 Cjo=4p M=.4 tt=20n Iave=200m Vpk=75 mfg=OnSemi type=silicon)
+
+* --- rectifier ---
+.model 1N4007 D(Is=90p Rs=40m Cjo=30p N=1.4 TT=5u Iave=1 Vpk=1000 mfg=Diodes_Inc. type=silicon)
+
+* --- Schottky ---
+.model 1N5817 D(Is=31.7u Rs=.051 N=1.373 Cjo=190p M=.3 Eg=.69 Xti=2 Iave=1 Vpk=20 mfg=OnSemi type=Schottky)
+.model 1N5818 D(Is=31.7u Rs=.051 N=1.373 Cjo=160p M=.38 Eg=.69 Xti=2 Iave=1 Vpk=30 mfg=OnSemi type=Schottky)
+.model 1N5819 D(Is=31.7u Rs=.051 N=1.373 Cjo=110p M=.35 Eg=.69 Xti=2 Iave=1 Vpk=40 mfg=OnSemi type=Schottky)
+.model BAT54 D(Is=.1u Rs=2.2 N=1 Cjo=12p M=.3 Eg=.69 Xti=2 Iave=300m Vpk=30 mfg=Vishay type=Schottky)
+
+* --- Zener ---
+.model 1N750 D(Is=.88f Rs=.25 Cjo=175p M=.55 nbv=1.7 bv=4.7 Vj=.75 Isr=1.86n Nr=2 Ibv=20.245m Ibvl=1.96m Nbvl=15 Tbv1=-21.3u Vpk=4.7 mfg=OnSemi type=Zener)
+.model BZX84C12L D(Is=.6n Rs=.5 Cjo=150p nbv=5 bv=12 Ibv=1m Vpk=12 mfg=OnSemi type=Zener)
+
+* --- LEDs ---
+* QTLP690C = Fairchild red LED; NSPW500BS = Nichia white LED
+.model QTLP690C D(Is=1e-22 Rs=6 N=1.5 Cjo=50p Xti=100 Iave=160m Vpk=5 mfg=Fairchild type=LED)
+.model NSPW500BS D(Is=.27n Rs=5.65 N=6.79 Cjo=42p Xti=200 Iave=30m Vpk=5 mfg=Nichia type=LED)
+
+* --- [ltwiki] entries, not in the LTspice 17.2.4 library ---
+* LedWHITE is the older form of NSPW500BS above (without Xti=200).
+.MODEL 1N34A D(IS=2.6u RS=6.5 N=1.6 CJO=0.8p EG=0.67 BV=25 IBV=0.003 Type=GePunctualContact)
+.MODEL LedBLUE D (IS=93.2P RS=42M N=7.47 BV=5 IBV=10U CJO=2.97P VJ=.75 M=.333 TT=4.32U Iave=40m Vpk=5 type=LED)
+.model LedWHITE D(Is=0.27n Rs=5.65 N=6.79 Cjo=42p Iave=30m Vpk=5 type=LED)

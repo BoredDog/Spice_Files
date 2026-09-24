@@ -1,0 +1,105 @@
+* ==========================================================================
+* @part: BC107 BC108 BC109 BC177
+* @family: bjt
+* @source: Zetex
+* @url: https://ngspice.sourceforge.io/model-parameters/MicroCap-LIBRARY.7z (Micro-Cap 12 library)
+* @origin-file: ngspice/MicroCap-LIBRARY/MicroCap-LIBRARY-for-ngspice/zetex.lib
+* @retrieved: 2026-09-24
+* @licence: grant: "It is supplied free of charge by Zetex for the purpose of research and design and may be used or copied intact (including this notice) for that purpose only."; notice: "(C) 1996 ZETEX PLC The copyright in this model and the design embodied belong to"
+* @added-by: garv.singh
+* @pins: BC107BP_ZX: 1 2 3
+* @pins: BC108BP_ZX: 1 2 3
+* @pins: BC109BP_ZX: 1 2 3
+* @pins: BC177AP_ZX: 1 2 3
+* Definitions below are copied verbatim from the origin file.
+* ==========================================================================
+
+* ---- original file header ----
+*ZETEX  BC80716 Spice model    Last revision  27/2/03
+*
+* ---- end of original file header ----
+
+* ---- vendor notice (copied intact) ----
+*
+* For later versions of Spice use the following parameter to obtain
+* better zener voltage variation over temperature.
+* TBV1=.61E-3
+*
+*                          (C)  1996 ZETEX PLC
+*
+*   The copyright in this model  and  the design embodied belong to
+*   Zetex PLC ("Zetex"). It is supplied free of charge by Zetex for
+*   the purpose  of research  and design  and may be used or copied
+*   intact (including this notice) for that purpose only. All other
+*   rights  are  reserved.  The model  is believed  accurate but no
+*   condition or warranty as to its  merchantability or fitness for
+*   purpose  is  given  and  no liability  in respect of any use is
+*   accepted by Zetex PLC, its distributors or agent.
+*
+*
+*   Zetex PLC, Fields New Road, Chadderton, Oldham  OL9 8NP
+*   ZETEX   BZX84C9V1   Spice Model   Last Revision 1/10/96
+*
+
+* ---- vendor notice (copied intact) ----
+*
+* For later versions of Spice use the following parameter to obtain
+* better zener voltage variation over temperature.
+* TBV1=.63E-3
+*
+*                          (C)  1996 ZETEX PLC
+*
+*   The copyright in this model  and  the design embodied belong to
+*   Zetex PLC ("Zetex"). It is supplied free of charge by Zetex for
+*   the purpose  of research  and design  and may be used or copied
+*   intact (including this notice) for that purpose only. All other
+*   rights  are  reserved.  The model  is believed  accurate but no
+*   condition or warranty as to its  merchantability or fitness for
+
+*
+*   ZETEX  BC107BP Spice model     Last revision  4/90
+*
+.SUBCKT BC107BP_ZX 1 2 3
+*
+Q1 1 2 3 BC107BP
+*
+.MODEL BC107BP NPN IS =1.8E-14 ISE=5.0E-14 NF =.9955 NE =1.46 BF =400 BR =35.5
++IKF=.14 IKR=.03 ISC=1.72E-13 NC =1.27 NR =1.005 RB =.56 RE =.6 RC =.25 VAF=80
++VAR=12.5 CJE=13E-12 TF =.64E-9 CJC=4E-12 TR =50.72E-9 VJC=.54 MJC=.33
+.ENDS
+
+*
+*   ZETEX  BC108BP Spice model     Last revision  4/90
+*
+.SUBCKT BC108BP_ZX 1 2 3
+*                  C B E
+Q1 1 2 3 BC108BP
+*
+.MODEL BC108BP NPN IS =1.8E-14 ISE=5.0E-14 NF =.9955 NE =1.46 BF =400 BR =35.5
++IKF=.14 IKR=.03 ISC=1.72E-13 NC =1.27 NR =1.005 RB =.56 RE =.6 RC =.25 VAF=80
++VAR=12.5 CJE=13E-12 TF =.64E-9 CJC=4E-12 TR =50.72E-9 VJC=.54 MJC=.33
+.ENDS
+
+*
+*   ZETEX  BC109BP Spice model     Last revision  4/90
+*
+.SUBCKT BC109BP_ZX 1 2 3
+*
+Q1 1 2 3 BC109BP
+*
+.MODEL BC109BP NPN IS =1.8E-14 ISE=5.0E-14 NF =.9955 NE =1.46 BF =400 BR =35.5
++IKF=.14 IKR=.03 ISC=1.72E-13 NC =1.27 NR =1.005 RB =.56 RE =.6 RC =.25 VAF=80
++VAR=12.5 CJE=13E-12 TF =.64E-9 CJC=4E-12 TR =50.72E-9 VJC=.54 MJC=.33
+.ENDS
+
+*
+*   ZETEX  BC177AP Spice model    Last revision  4/90
+*
+.SUBCKT BC177AP_ZX 1 2 3
+*
+Q1 1 2 3 BC177AP
+*
+.MODEL BC177AP PNP IS =1.149E-14 ISE=5E-14 NF =.9872 NE =1.4 BF =330 BR =13
++IKF=.1 IKR=.012 ISC=1.43E-14 NC =1.1 NR =.996 RB =.2 RE =.4 RC =.95 VAR=8.15
++VAF=84.56 CJE=16E-12 TF =.493E-9 CJC=10.5E-12 TR =73.55E-9 MJC=.415 VJC=.565
+.ENDS

@@ -1,0 +1,63 @@
+* ==========================================================================
+* @part: BZX84-B12
+* @family: diodes
+* @source: Nexperia
+* @url: https://assets.nexperia.com/documents/spice-model/BZX84-B12.prm
+* @origin-file: manual/nexperia/BZX84-B12.prm
+* @retrieved: 2026-09-24
+* @licence: no licence or copyright text in the vendor file (terms unknown)
+* @added-by: garv.singh
+* The complete origin file follows, unchanged.
+* ==========================================================================
+
+*
+*******************************************
+*
+*BZX84-B12
+*
+*NXP Semiconductors
+*
+*Voltage regulator diode
+*
+*
+*
+*
+* 
+*
+*IR    = 100nA @ VR = 8V
+*IZSM  = 2,5A  @ tp = 100µs
+*VZmax = 12,7V @ IZ = 5mA
+*
+*
+*
+*
+* 
+*
+*
+*Package pinning does not match Spice model pinning.
+*Package: SOT23
+*
+*Package Pin 1: Anode
+*Package Pin 2: not connected
+*Package Pin 3: Cathode
+*
+*
+*
+*Simulator: PSPICE
+*
+*******************************************
+*#
+.MODEL BZX84-B12 D
++ IS=2.6665E-18
++ N=.82284
++ RS=.51617
++ IKF=11.760E-3
++ CJO=48.079E-12
++ M=.32805
++ VJ=.62172
++ ISR=47.692E-12
++ BV=12.119
++ IBV=.54544
++ TT=825.22E-9
+*##
+*

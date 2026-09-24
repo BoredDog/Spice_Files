@@ -1,0 +1,42 @@
+* ==========================================================================
+* @part: BZX79-C6V8
+* @family: diodes
+* @source: Nexperia
+* @url: https://assets.nexperia.com/documents/spice-model/BZX79-C6V8.txt
+* @origin-file: manual/nexperia/BZX79-C6V8.txt
+* @retrieved: 2026-09-24
+* @licence: no licence or copyright text in the vendor file (terms unknown)
+* @added-by: garv.singh
+* @patched: spiceconv stray-ends (1 change(s))
+* The complete origin file follows (modified, see @patched).
+* ==========================================================================
+
+***********************************************************
+*
+* BZX79-C6V8
+*
+* Nexperia
+*
+* Voltage regulator diodes
+* VFmax = 0,9V    @ IF = 10mA
+* IRmax = 2µA     @ VR = 2V
+* VZmax = 7,2V    @ IZ = 5mA
+* IZSM  = 6A      @ tp = 100µs
+*
+*
+*
+* Package pinning does not match Spice model pinning.
+* Package: SOD27
+*
+* Package Pin 1: Cathode
+* Package Pin 2: Anode
+*
+*
+*
+* Extraction date (week/year): #
+* Simulator: PSPICE
+*
+***********************************************************
+*
+.MODEL BZX79-C6V8 D  IS=2.4710E-9  N=2.0880  RS=1.0000E-3  IKF=6.5100  CJO=95.650E-12  M=.3487  VJ=.7022  ISR=10.010E-21  BV=6.9480  IBV=.8623  TT=140E-9
+*

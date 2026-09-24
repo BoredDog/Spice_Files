@@ -1,0 +1,87 @@
+* ==========================================================================
+* @part: BT136
+* @family: thyristors
+* @source: KiCadLib
+* @url: https://github.com/kicad-spice-library/KiCad-Spice-Library (Models/uncategorized/spice_complete/TRIAC.LIB)
+* @origin-file: KiCad-Spice-Library/Models/uncategorized/spice_complete/TRIAC.LIB
+* @retrieved: 2026-09-24
+* @licence: notice: "Copyright Intusoft 1993-1997"
+* @added-by: nav
+* @pins: BT136-600: 1 2 3
+* @pins: BT136-800: 1 2 3
+* Definitions below are copied verbatim from the origin file.
+* ==========================================================================
+
+* ---- original file header ----
+**********
+*Copyright Intusoft 1993-1997
+*All Rights Reserved
+**********
+*SRC=TAC210-8;TAC2108;TRIACS;;
+*SYM=TRIAC
+*HELP issyntax.hlp "Triacs"
+* ---- end of original file header ----
+
+*****
+*SRC=BT136-600;BT136-600;TRIACS;PHILIPS;600V 4A
+*SYM=TRIAC
+*HELP issyntax.hlp "Triacs"
+.SUBCKT BT136-600  1  2  3
+*     TERMINALS: MT2 G MT1
+QN1  5 4 3  NOUT; OFF
+QN2 11 6 7  NOUT; OFF
+QP1 6 11 3  POUT; OFF
+QP2  4 5 7  POUT; OFF
+DF  4  5  DZ; OFF
+DR  6 11  DZ; OFF
+RF  4 6  60MEG
+RT2 1 7  0.123
+RH  7 6  35
+RGP 8 3  15.5
+RG  2 8  31.7
+RS  8 4  34.5
+DN  9 2  DIN; OFF
+RN  9 3  457
+GNN  6 7 9 3 16.6M
+GNP  4 5 9 3 3.91M
+DP 2 10  DIP; OFF
+RP 10 3  457
+GP  7 6 10 3 15.3M
+.MODEL DIN  D (IS=115F)
+.MODEL DIP  D (IS=115F N=1.5)
+.MODEL DZ   D (IS=115F N=1.5 IBV=10U BV=600)
+.MODEL POUT PNP (IS=115F BF=5 CJE=508P TF=43.4U)
+.MODEL NOUT NPN (IS=115F BF=20 CJE=508P CJC=102P TF=2.89U)
+.ENDS
+
+*****
+*SRC=BT136-800;BT136-800;TRIACS;PHILIPS;800V 4A
+*SYM=TRIAC
+*HELP issyntax.hlp "Triacs"
+.SUBCKT BT136-800  1  2  3
+*     TERMINALS: MT2 G MT1
+QN1  5 4 3  NOUT; OFF
+QN2 11 6 7  NOUT; OFF
+QP1 6 11 3  POUT; OFF
+QP2  4 5 7  POUT; OFF
+DF  4  5  DZ; OFF
+DR  6 11  DZ; OFF
+RF  4 6  80MEG
+RT2 1 7  0.123
+RH  7 6  35
+RGP 8 3  15.5
+RG  2 8  31.7
+RS  8 4  34.5
+DN  9 2  DIN; OFF
+RN  9 3  457
+GNN  6 7 9 3 16.6M
+GNP  4 5 9 3 3.91M
+DP 2 10  DIP; OFF
+RP 10 3  457
+GP  7 6 10 3 15.3M
+.MODEL DIN  D (IS=115F)
+.MODEL DIP  D (IS=115F N=1.5)
+.MODEL DZ   D (IS=115F N=1.5 IBV=10U BV=800)
+.MODEL POUT PNP (IS=115F BF=5 CJE=508P TF=43.4U)
+.MODEL NOUT NPN (IS=115F BF=20 CJE=508P CJC=102P TF=2.89U)
+.ENDS

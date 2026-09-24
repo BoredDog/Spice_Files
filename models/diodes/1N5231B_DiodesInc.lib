@@ -1,0 +1,29 @@
+* ==========================================================================
+* @part: 1N5231B
+* @family: diodes
+* @source: DiodesInc
+* @url: https://github.com/kicad-spice-library/KiCad-Spice-Library (Bordodynov LTspice library) (Zener_DiodesInc.lib)
+* @origin-file: KiCad-Spice-Library/Models/uncategorized/Bordodynovs Electronics Lib/sub/Zener_DiodesInc.lib
+* @retrieved: 2026-09-24
+* @licence: no licence or copyright text in the vendor file (terms unknown)
+* @added-by: garv.singh
+* @pins: 1N5231B: 1 2
+* @patched: 1 helper subckt/model name(s) suffixed with '__1N5231B' so this file can be included together with other files
+* Definitions below are copied verbatim from the origin file.
+* ==========================================================================
+
+* ---- original file header ----
+*SRC=1N4728A;1N4728A;Diodes;Zener <=10V; 3.30V  1.00W   Diodes Inc.Zener
+* ---- end of original file header ----
+
+*SRC=1N5231B;1N5231B;Diodes;Zener <=10V; 5.10V  0.500W   Diodes Inc. Zener
+.SUBCKT 1N5231B  1 2
+*        Terminals    A   K
+D1 1 2 DF__1N5231B
+DZ 3 1 DR
+VZ 2 3 2.62
+.MODEL DF__1N5231B D ( IS=40.4p RS=2.32 N=1.10 CJO=94.6p VJ=0.750 M=0.330 TT=50.1n )
+.MODEL DR D ( IS=8.08f RS=13.1 N=3.00 )
+.ENDS
+
+.MODEL DF__1N5231B D ( IS=25.0p RS=33.6 N=1.10 CJO=230p VJ=0.750 M=0.330 TT=50.1n )

@@ -1,0 +1,73 @@
+* ==========================================================================
+* @part: BZX55C5V1
+* @family: diodes
+* @source: Vishay
+* @url: https://www.vishay.com/doc?84090
+* @origin-file: vishay/BZX55C5V1.txt
+* @retrieved: 2026-09-24
+* @licence: notice: "Copyright: Thomatronik GmbH, Germany"
+* @added-by: garv.singh
+* @pins: bzx55c5v1: 1 9
+* @patched: spiceconv dots (7 change(s)), r-model (4 change(s))
+* The complete origin file follows (modified, see @patched).
+* ==========================================================================
+
+**********************************
+
+* Model created by               *
+
+*   Uni.Dipl.-Ing. Arpad Buermen *
+
+*   arpad.burmen@ieee.org        *
+
+* Copyright:                     *
+
+*   Thomatronik GmbH, Germany    *
+
+*   info@thomatronik.de          *
+
+**********************************
+
+* February 2001
+
+*   SPICE3
+
+*                    anode     cathode
+
+* Reverse direction: node 1 <- node 9
+
+.SUBCKT bzx55c5v1 1 9
+
+DF 1 9 DFMOD
+
+.MODEL DFMOD D N = 2 IS = 1.9E-009 RS = 0.36459  EG = 1.11 XTI = 3  CJO = 1.71713E-010 VJ = 0.490432 M = 0.5 FC = 0.5  TT = 1E-008 TNOM = 25
+
+* Leakage
+
+RL 1 9 1.05263E+007 tc1=0 tc2=0
+
+
+* Breakdown
+
+ES 9 90 10 20 1
+
+DR1 90 31 DREV1 TEMP = 25
+
+.MODEL DREV1 D IS = 1E-015 N = 3.95147 RS = 0.00225008 TNOM = 25
+
+VR1 31 1 0.00879249
+
+DR2 90 32 DREV2 TEMP = 25
+
+.MODEL DREV2 D IS = 1E-015 N = 2.92114 RS = 695.888 TNOM = 25
+
+VR2 32 1 0.0793202
+
+VTRIM 20 0 2.95119
+
+IBVC 0 10 0.001
+
+RBVC 10 0 5100 tc1=0.00015
+
+
+.ENDS

@@ -1,0 +1,20 @@
+* ==========================================================================
+* @part: 1N5406 1N5408 1N5711WS
+* @family: diodes
+* @source: DiodesInc
+* @url: https://www.diodes.com/assets/Spice-Models/spicemodels-all.txt
+* @origin-file: diodes/spicemodels-all.txt
+* @retrieved: 2026-09-24
+* @licence: no licence or copyright text in the vendor file (terms unknown)
+* @added-by: garv.singh
+* Definitions below are copied verbatim from the origin file.
+* ==========================================================================
+
+.MODEL DI_1N5406 D  ( IS=63.0n RS=14.1m BV=600 IBV=10.0u 
++ CJO=53.0p  M=0.333 N=1.70 TT=4.32u )
+
+.MODEL DI_1N5408 D  ( IS=63.0n RS=14.1m BV=1.00k IBV=10.0u 
++ CJO=53.0p  M=0.333 N=1.70 TT=4.32u )
+
+.MODEL DI_1N5711WS D  ( IS=315n RS=2.80 BV=70.0 IBV=10.0u
++ CJO=2.00p  M=0.333 N=2.03 TT=1.44n )

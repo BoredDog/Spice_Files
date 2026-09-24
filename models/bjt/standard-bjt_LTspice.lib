@@ -1,0 +1,41 @@
+* ==========================================================================
+* @part: 2N2222 2N2907 2N3904 2N3906 BC547B BC547C BC557B BC337-25 BC327-25 2N3055
+* @family: bjt
+* @source: LTspice
+* @url: LTspice lib/cmp/standard.bjt (https://ltwiki.org/index.php?title=Standard.bjt)
+* @retrieved: 2026-09-24
+* @licence: (c) Linear Technology / Analog Devices, all rights reserved; attributed lines
+* @added-by: nav
+* ==========================================================================
+* ============================================================================
+* ltspice_std_bjt.lib  --  flag: BOTH-lt
+* ----------------------------------------------------------------------------
+* Source: LTspice lib/cmp/standard.bjt (author Mike Engelhardt).
+*   "Copyright (c) 2000 Linear Technology Corporation. All rights reserved."
+*   (now Analog Devices, Inc.)
+* Every line was checked against the standard.bjt shipped with LTspice 17.2.4
+* for macOS (2026-09-24); only whitespace inside the lines was normalised.
+* Redistributed as individual attributed lines for non-commercial university
+* teaching/research only -- see NOTICE.md.
+*
+* Vceo, Icrating, mfg are LTspice informational fields.
+* ngspice: needs "set ngbehavior=lt|ltps|ltpsa" (see the repo .spiceinit);
+*   mfg=... is a fatal error in native mode.
+* ============================================================================
+
+* --- general purpose small signal ---
+.model 2N2222 NPN(IS=1E-14 VAF=100 BF=200 IKF=0.3 XTB=1.5 BR=3 CJC=8E-12 CJE=25E-12 TR=100E-9 TF=400E-12 ITF=1 VTF=2 XTF=3 RB=10 RC=.3 RE=.2 Vceo=30 Icrating=800m mfg=NXP)
+.model 2N2907 PNP(IS=1E-14 VAF=120 BF=250 IKF=0.3 XTB=1.5 BR=3 CJC=8E-12 CJE=30E-12 TR=100E-9 TF=400E-12 ITF=1 VTF=2 XTF=3 RB=10 RC=.3 RE=.2 Vceo=40 Icrating=600m mfg=NXP)
+.model 2N3904 NPN(IS=1E-14 VAF=100 Bf=300 IKF=0.4 XTB=1.5 BR=4 CJC=4E-12 CJE=8E-12 RB=20 RC=0.1 RE=0.1 TR=250E-9 TF=350E-12 ITF=1 VTF=2 XTF=3 Vceo=40 Icrating=200m mfg=NXP)
+.model 2N3906 PNP(IS=1E-14 VAF=100 BF=200 IKF=0.4 XTB=1.5 BR=4 CJC=4.5E-12 CJE=10E-12 RB=20 RC=0.1 RE=0.1 TR=250E-9 TF=350E-12 ITF=1 VTF=2 XTF=3 Vceo=40 Icrating=200m mfg=NXP)
+
+* --- BC5xx / BC3xx ---
+.model BC547B NPN(IS=2.39E-14 NF=1.008 ISE=3.545E-15 NE=1.541 BF=294.3 IKF=0.1357 VAF=63.2 NR=1.004 ISC=6.272E-14 NC=1.243 BR=7.946 IKR=0.1144 VAR=25.9 RB=1 IRB=1.00E-06 RBM=1 RE=0.4683 RC=0.85 XTB=0 EG=1.11 XTI=3 CJE=1.358E-11 VJE=0.65 MJE=0.3279 TF=4.391E-10 XTF=120 VTF=2.643 ITF=0.7495 PTF=0 CJC=3.728E-12 VJC=0.3997 MJC=0.2955 XCJC=0.6193 TR=1.00E-32 CJS=0 VJS=0.75 MJS=0.333 FC=0.9579 Vceo=45 Icrating=100m mfg=NXP)
+.model BC547C NPN(IS=4.679E-14 NF=1.01 ISE=2.642E-15 NE=1.581 BF=458.7 IKF=0.1371 VAF=52.64 NR=1.019 ISC=2.337E-14 NC=1.164 BR=11.57 IKR=0.1144 VAR=364.5 RB=1 IRB=1.00E-06 RBM=1 RE=0.2598 RC=1 XTB=0 EG=1.11 XTI=3 CJE=1.229E-11 VJE=0.5591 MJE=0.3385 TF=4.689E-10 XTF=160 VTF=2.828 ITF=0.8842 PTF=0 CJC=4.42E-12 VJC=0.1994 MJC=0.2782 XCJC=0.6193 TR=1.00E-32 CJS=0 VJS=0.75 MJS=0.333 FC=0.7936 Vceo=45 Icrating=100m mfg=NXP)
+.model BC557B PNP(IS=3.83E-14 NF=1.008 ISE=1.22E-14 NE=1.528 BF=344.4 IKF=0.08039 VAF=21.11 NR=1.005 ISC=2.85E-13 NC=1.28 BR=14.84 IKR=0.047 VAR=32.02 RB=1 IRB=1.00E-06 RBM=1 RE=0.6202 RC=0.5713 XTB=0 EG=1.11 XTI=3 CJE=1.23E-11 VJE=0.6106 MJE=0.378 TF=5.60E-10 XTF=3.414 VTF=5.23 ITF=0.1483 PTF=0 CJC=1.08E-11 VJC=0.1022 MJC=0.3563 XCJC=0.6288 TR=1.00E-32 CJS=0 VJS=0.75 MJS=0.333 FC=0.8027 Vceo=45 Icrating=100m mfg=NXP)
+.model BC337-25 NPN(IS=4.13E-14 NF=0.9822 ISE=3.534E-15 NE=1.35 BF=292.4 IKF=0.9 VAF=145.7 NR=0.982 ISC=1.957E-13 NC=1.3 BR=23.68 IKR=0.1 VAR=20 RB=60 IRB=2.00E-04 RBM=8 RE=0.1129 RC=0.25 XTB=0 EG=1.11 XTI=3 CJE=3.799E-11 VJE=0.6752 MJE=0.3488 TF=5.4E-10 XTF=4 VTF=4.448 ITF=0.665 PTF=90 CJC=1.355E-11 VJC=0.3523 MJC=0.3831 XCJC=0.455 TR=3.00E-08 CJS=0 VJS=0.75 MJS=0.333 FC=0.643 Vceo=45 Icrating=500m mfg=NXP)
+.model BC327-25 PNP(IS=1.08E-13 NF=0.99 ISE=2.713E-14 NE=1.4 BF=385.7 IKF=0.3603 VAF=31.29 NR=0.9849 ISC=5.062E-13 NC=1.295 BR=20.57 IKR=0.054 VAR=11.62 RB=1 IRB=1.00E-06 RBM=0.5 RE=0.1415 RC=0.2623 XTB=0 EG=1.11 XTI=3 CJE=5.114E-11 VJE=0.8911 MJE=0.4417 TF=7.359E-10 XTF=1.859 VTF=3.813 ITF=0.4393 PTF=0 CJC=2.656E-11 VJC=0.62 MJC=0.4836 XCJC=0.459 TR=5.00E-08 CJS=0 VJS=0.75 MJS=0.333 FC=0.99 Vceo=45 Icrating=500m mfg=NXP)
+
+* --- power ---
+* Uses legacy SPICE2 names (PC/MC/PE/ME/IK) for VJC/MJC/VJE/MJE/IKF.
+.model 2N3055 NPN(Bf=73 Br=2.66 Rb=.81 Rc=.0856 Re=.000856 CJC=1000P PC=.75 MC=.33 Tr=.5703U Is=2.37E-8 CJE=415P PE=.75 ME=.5 TF=99.52N NE=1.26 IK=1 Vceo=60 Icrating=10 mfg=STMicro)

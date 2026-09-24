@@ -1,0 +1,23 @@
+* ==========================================================================
+* @part: 2N4401 2N4403 2N5551 2N5401
+* @family: bjt
+* @source: LTwiki
+* @url: https://github.com/kicad-spice-library/KiCad-Spice-Library (Models/Transistor/BJT/BJT.lib)
+* @origin-file: KiCad-Spice-Library/Models/Transistor/BJT/BJT.lib
+* @retrieved: 2026-09-24
+* @licence: no licence or copyright text in the vendor file (terms unknown)
+* @added-by: garv.singh
+* Definitions below are copied verbatim from the origin file.
+* ==========================================================================
+
+* ---- original file header ----
+* Unofficial LTSpice Wiki Page: http://ltwiki.org/index.php?title=Standard.dio Date of latest edit	12:47, 24 February 2014
+* ---- end of original file header ----
+
+.model 2N4401 NPN(Is=26.03f Xti=3 Eg=1.11 Vaf=90.7 Bf=4.292K Ne=1.244 Ise=26.03f Ikf=.2061 Xtb=1.5 Br=1.01 Nc=2 Isc=0 Ikr=0 Rc=.5 Cjc=11.01p Mjc=.3763 Vjc=.75 Fc=.5 Cje=24.07p Mje=.3641 Vje=.75 Tr=233.7n Tf=466.5p Itf=0 Vtf=0 Xtf=0 Rb=10 Vceo=40 Icrating=600m mfg=Fairchild)
+
+.model 2N4403 PNP(Is=650.6E-18 Xti=3 Eg=1.11 Vaf=115.7 Bf=216.2 Ne=1.829 Ise=58.72f Ikf=1.079 Xtb=1.5 Br=3.578 Nc=2 Isc=0 Ikr=0 Rc=.715 Cjc=14.76p Mjc=.5383 Vjc=.75 Fc=.5 Cje=19.82p Mje=.3357 Vje=.75 Tr=111.6n Tf=603.7p Itf=.65 Vtf=5 Xtf=1.7 Rb=10 Vceo=40 Icrating=600m mfg=Fairchild)
+
+.model 2N5401 PNP(Is=21.48f Xti=3 Eg=1.11 Vaf=100 Bf=132.1 Ne=1.375 Ise=21.48f Ikf=.1848 Xtb=1.5 Br=3.661 Nc=2 Isc=0 Ikr=0 Rc=1.6 Cjc=17.63p Mjc=.5312 Vjc=.75 Fc=.5 Cje=73.39p Mje=.3777 Vje=.75 Tr=1.476n Tf=641.9p Itf=0 Vtf=0 Xtf=0 Rb=10 Vceo=150 Icrating=600m mfg=Fairchild)
+
+.MODEL 2N5551 NPN(IS=2.511f ISE=2.511f ISC=0 XTI=3 BF=242.6 BR=3.197 IKF=0.3458 IKR=0 XTB=1.5 VAF=100 VAR=30 VJE=0.65 VJC=0.65 RE=0.1 RC=1 RB=10 CJE=18.79p CJC=4.883p XCJC=0.75 FC=0.5 NF=1 NR=1 NE=1.249 NC=2 MJE=0.3416 MJC=0.3047 TF=560p TR=1.202n ITF=50m VTF=5 XTF=8 EG=1.11 VCEO=180 ICRATING=600m MFG=NSC)
